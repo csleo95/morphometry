@@ -117,4 +117,100 @@ The pipeline is comprised of this two workflows:
 After running the pipeline, please check all the files mentioned in the item 2.6.7 above. If there are no issues and errors in the run of the pipeline, please send the 33 text files in the enigma_ocd/imaging_transcriptomics directory to leonardo.saraiva@usp.br. If there are issues and/or errors in the run of the pipeline, please send the stdout.log, stdout.log and report.html in the enigma_ocd directory to leonardo.saraiva@usp.br.
 
 
-## Trubleshooting
+## Troubleshooting
+
+### My server does not have internet access ###
+If your server does not have internet access, you can still run this pipeline by downloading its dependencies in another server (e.g., your personal computer) with internet access, and afterwards transferring them to your server. However, your server must have Docker and/or Singularity installed so you can run this pipeline. Three workarounds are outlined below depending on whether you will use Docker or Singularity in your server.
+
+**•	Using Docker:** <br>
+You will need to have Docker installed on the other server with internet access. In this case, you can follow the steps below: <br>
+i. Download the handler scripts in the server with internet access. <br>
+ii. Run the commands below on the server with internet access to download the pipeline image, and convert it to a tar file: <br>
+```(bash)
+docker pull csleo/img_trs
+docker save --output img_trs.tar csleo/img_trs
+```
+iii. Transfer the handler script file (run_img_trs.sh) and the tar file of the pipeline (img_trs.tar) to your server without internet connection <br>
+iv. In your server without internet connection, run the command below in the folder where the tar file of the pipeline (img_trs.tar) is located:
+```(bash)
+docker load -i img_trs.tar
+```
+v. In your server without internet connection, you can follow step 2.2 onwards to run the pipeline.
+
+**•	Using Singularity (version ≥ 3.0)** <br>
+You will need to have Singularity installed on the other server with internet access. In this case, you can follow the steps below: <br>
+i. Download the handler scripts in the server with internet access. <br>
+ii. Run the command below on the server with internet access to build the pipeline image: <br>
+```(bash)
+singularity build img_trs.sif docker://csleo/img_trs
+```
+iii. Transfer the handler script file (run_img_trs.sh) and the SIF file of the pipeline (img_trs.sif) to your server without internet connection <br>
+iv. In your server without an internet connection, you can follow step 2.2 onwards to run the pipeline. Make sure the img_trs.sif file is in the directory from which you are executing the handler script.
+
+**•	Using Singularity (version < 3.0)** <br>
+You will need to have Docker installed on the other server with internet access. In this case, you can follow the steps below: <br>
+i. Download the handler scripts in the server with internet access. <br>
+ii. Run the command below on the server with internet access to download the pipeline image (note that you have to substitute the <version> by 2.3, 2.4, 2.5 or 2.6 depending on the version of Singularity that is installed on your server): <br>
+```(bash)
+docker run --privileged -t --rm \
+           -v /var/run/docker.sock:/var/run/docker.sock \
+           -v $(pwd):/output \
+           singularityware/docker2singularity:v<version> \
+           --name img_trs csleo/img_trs
+```
+iii. Transfer the handler script file (run_img_trs.sh) and the SIMG file of the pipeline (img_trs.simg)  to your server without internet connection <br>
+iv. In your server without an internet connection, you can follow step 2.2 onwards to run the pipeline. Make sure the img_trs.simg file is in the directory from which you are executing the handler script.
+
+### Neither Docker, nor Singularity are installed in the system ###
+If neither container platform is installed in the system, please install one of them. You can do this by following the instructions in one of the links below (you will need root access to go through them): <br>
+•	Latest Docker version on Linux:  https://docs.docker.com/desktop/install/linux-install/test <br>
+•	Latest Docker version on Mac: https://docs.docker.com/desktop/install/mac-install/ <br>
+•	Latest Docker version on Windows: https://docs.docker.com/desktop/install/windows-install/ <br>
+•	Latest Singularity version on Linux, Mac, or Windows: https://docs.sylabs.io/guides/3.10/user-guide/quick_start.html <br>
+
+### Docker daemon is not running ###
+If the Docker daemon is not running, the handler script will output a message of this sort: <br>
+```(bash)
+Cannot connect to the Docker daemon at unix:///home/leocs/.docker/desktop/docker.sock. Is the docker daemon running?
+```
+There are two ways to fix this issue:
+•	You can search Docker Desktop on the Applications menu and open it. <br>
+•	Alternatively, you can run the following command on the terminal: <br>
+```(bash)
+systemctl –user start docker-desktop
+```
+
+### Not enough available hard disk space in Docker to download the pipeline image ###
+If there is not enough available space in the hard disk allocated to Docker, the handler script will print a message of this sort: <br>
+```(bash)
+No space left on the device
+```
+There are three ways to increase the available hard disk space in Docker Desktop (you can try a combination of more than one): <br>
+   
+**•	Delete local images** <br>
+There are two ways of doing this: <br>
+&nbsp;&nbsp;&nbsp;&nbsp;-	Open Docker Desktop and delete local images by clicking on the three dots on the left of an image’s row and then clicking on remove. <br>
+&nbsp;&nbsp;&nbsp;&nbsp;-	Alternatively, enter the command `docker image rm [image name]`, for instance: <br> 
+```(bash)
+docker image rm hello-world
+```
+**•	Delete unused data** <br>
+&nbsp;&nbsp;&nbsp;&nbsp;-	 Enter the following command to delete unused containers, networks, images: <br>
+```(bash)
+docker system prune
+```   
+**•	Increase the available disk space allocated to Docker Desktop:** <br>
+&nbsp;&nbsp;&nbsp;&nbsp;-	 Open Docker Desktop and click on the Settings button <br>
+&nbsp;&nbsp;&nbsp;&nbsp;-	 Click on the Resources button <br>
+&nbsp;&nbsp;&nbsp;&nbsp;-	 Increase the Disk image size of Docker Desktop <br>
+
+### Server with Singularity version < 3.0 ###
+In this case, the handler script will use the docker2singularity utility to download the pipeline image from Docker Hub and convert it to a format compatible with the Singularity version on the server. However, for this to work, Docker must be installed on the server. If it is not installed on your server, please go through the steps 3.1.2.c to 3.1.4.c to download the pipeline image from another server with Docker installed and then transfer the image to your server.
+
+### Docker does not recognize the path of my directories ###
+If are using Docker to run the pipeline and the directory with NIfTI files and/or the directory with freesurfer’s recon-all output are located in paths not shared with Docker, an error message of this sort will be print:
+```(bash)
+docker: Error response from daemon: Mounts denied: 
+The path /media/leocs/leo.hd/DRIVE/ img_trs not shared from the host and is not known to Docker.
+```   
+To deal with this, go to docker desktop menu, and click on the File sharing button and add the path(s) to the directory with NIfTI files and/or the directory with freesurfer’s recon-all.
