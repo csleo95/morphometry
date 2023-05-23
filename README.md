@@ -129,11 +129,11 @@ This section will walk you through running the pipeline on a slurm server step b
 ### 2. Execute the handler script ###
 
 &nbsp;&nbsp;&nbsp;&nbsp;i. Open the terminal <br>
-&nbsp;&nbsp;&nbsp;&nbsp;iii. Make the handler script file executable. To do this, enter the following command: <br>
+&nbsp;&nbsp;&nbsp;&nbsp;ii. Make the handler script file executable. To do this, enter the following command: <br>
 ```(bash)
 chmod +x morphometry_handler_slurm.sh
 ````
-&nbsp;&nbsp;&nbsp;&nbsp;iv. Execute the handler script file. To do this, enter the following command: <br>
+&nbsp;&nbsp;&nbsp;&nbsp;iii. Execute the handler script file. To do this, enter the following command: <br>
 ```(bash)
 ./morphometry_handler_slurm.sh
 ````
