@@ -139,7 +139,7 @@ chmod +x morphometry_handler_slurm.sh
 ````
 
 ### 3. Enter the #SBATCH directives to build the pipeline image <br>
-The handler script you ask for the #SBATCH directives (e.g., `#SBATCH --job-name=morphometry-job`) that will be appended to a sbatch script to build the Singularity / Apptainer image of the pipeline. After writing each directive, you should press enter and add the next one. After adding all directives enter `q` and press enter. At this point, the sbatch script will executed. 
+The handler script you ask for the #SBATCH directives (e.g., if `#SBATCH --job-name=morphometry-job` is the directive you want to use, then you should enter only `--job-name=morphometry-job`) that will be appended to a sbatch script to build the Singularity / Apptainer image of the pipeline. After writing each directive, you should press enter and add the next one. After adding all directives enter `q` and press enter. At this point, the sbatch script will executed. 
 
 ### 4. Enter the #SBATCH directives to run the pipeline <br>
 As above, the handler script you ask for the #SBATCH directives that will be appended to a sbatch script to run the image of the pipeline. After writing each directive, you should press enter and add the next one. After adding all directives enter `q` and press enter. At this point, the sbatch script will executed. 
