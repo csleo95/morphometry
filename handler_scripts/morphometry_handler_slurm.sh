@@ -18,7 +18,7 @@ echo ""
 echo ""
 
 # Define the name of the Singularity image
-image_name="csleo/morphometry:latest.sif"
+image_name="morphometry.sif"
 
 # Check if the image file exists in the current directory
 if [ ! -f "$image_name" ]; then
@@ -139,14 +139,13 @@ if [ ! -f "$script_name_run" ] || [ "$use_existing" = "N" ] || [ "$use_existing"
     for flag in "${sbatch_flags_run[@]}"; do
         echo "#SBATCH $flag" >> $script_name_run
     done
-    echo "module load singularity" >> $script_name_run
     echo "mkdir -p enigma_ocd" >> $script_name_run
     if [ -z "$recon_dir" ]; then
-        echo "singularity run --cleanenv --bind $(pwd):$nifti_dir $image_name \
-              $nifti_dir $(pwd)/enigma_ocd --work-dir $(pwd)/enigma_ocd --n-procs $n_procs" >> $script_name_run
+        echo "singularity run --cleanenv --bind $nifti_dir:/nifti_dir,$(pwd)/enigma_ocd:/enigma_ocd $image_name \
+              /nifti_dir /enigma_ocd --work-dir /enigma_ocd --n-procs $n_procs" >> $script_name_run
     else
-        echo "singularity run --cleanenv --bind $(pwd):$nifti_dir:$recon_dir $image_name \
-              $nifti_dir $(pwd)/enigma_ocd --work-dir $(pwd)/enigma_ocd --recon-all-dir $recon_dir --n-procs $n_procs" >> $script_name_run
+        echo "singularity run --cleanenv --bind $nifti_dir:/nifti_dir,$(pwd)/enigma_ocd:/enigma_ocd,$recon_dir:/recon_dir $image_name \
+              /nifti_dir /enigma_ocd --work-dir /enigma_ocd --recon-all-dir /recon_dir --n-procs $n_procs" >> $script_name_run
     fi
 
 fi
@@ -154,6 +153,5 @@ fi
 # Execute the sbatch script
 chmod +x $script_name_run
 sbatch $script_name_run
-
 
 
