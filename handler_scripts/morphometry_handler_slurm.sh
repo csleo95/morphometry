@@ -17,8 +17,17 @@ echo ""
 # Define the name of the Singularity image
 image_name="morphometry.sif"
 
+# Ask for the path to build the image
+echo -e "\033[1;34m[note]\033[0m Enter the directory path to build the image or press [Enter] for the current directory: \c" 
+read image_path
+        
+# If the image path is empty, set it to the current directory
+if [ -z "$image_path" ]; then
+    image_path="."
+fi
+
 # Check if the image file exists in the current directory
-if [ ! -f "$image_name" ]; then
+if [ ! -f "$image_path/$image_name" ]; then
     echo -e "\033[1;34m[note]\033[0m Image $image_name does not exist in the current directory - we will write and submit a sbatch script to run it"
 
     script_name_build="build_image.sh"
@@ -33,15 +42,6 @@ if [ ! -f "$image_name" ]; then
     if [ ! -f "$script_name_build" ] || [ "$use_existing" = "N" ] || [ "$use_existing" = "n" ]; then
         # Delete the old script file
         if [ -f $script_name_build ]; then rm -f $script_name_build; fi
-        
-        # Ask for the path to build the image
-        echo -e "\033[1;34m[note]\033[0m Enter the directory path to build the image or press [Enter] for the current directory: \c" 
-        read image_path
-        
-        # If the image path is empty, set it to the current directory
-        if [ -z "$image_path" ]; then
-            image_path="."
-        fi
 
         # Collect sbatch flags iteratively
         echo -e "\033[1;34m[prompt]\033[0m Enter the #SBATCH flags for building the $script_name_build script. Press 'q' when finished."
@@ -269,19 +269,19 @@ if [ -z "$(ls | grep 'run_image.*\.sh')" ]; then
 		fi
 		echo "PARTICIPANT_LABEL=\${participants[\$((SLURM_ARRAY_TASK_ID - 1))]}" >> run_image_sub.sh
 		if [ -z "$recon_dir" ]; then
-            echo "singularity run --cleanenv --bind "'"$nifti_dir"'":/nifti_dir,"'"$(pwd)"'"/enigma_ocd:/enigma_ocd "'"$image_path/$image_name"'" \
-          /nifti_dir /enigma_ocd --data-dir-structure "'"$nifti_dir_struc"'" --participant-label \$PARTICIPANT_LABEL --work-dir /enigma_ocd --n-procs "'"$n_procs"'" --preproc-only" >> run_image_sub.sh
+            echo "singularity run --cleanenv --bind $nifti_dir:/nifti_dir,$(pwd)/enigma_ocd:/enigma_ocd $image_path/$image_name \
+          /nifti_dir /enigma_ocd --data-dir-structure $nifti_dir_struc --participant-label \$PARTICIPANT_LABEL --work-dir /enigma_ocd --n-procs $n_procs --preproc-only" >> run_image_sub.sh
     	else
-        	echo "singularity run --cleanenv --bind "'"$nifti_dir"'":/nifti_dir,"'"$(pwd)"'"/enigma_ocd:/enigma_ocd,"'"$recon_dir"'":/recon_dir "'"$image_path/$image_name"'" \
-      /nifti_dir /enigma_ocd --data-dir-structure "'"$nifti_dir_struc"'" --participant-label \$PARTICIPANT_LABEL --work-dir /enigma_ocd --recon-all-dir /recon_dir --n-procs "'"$n_procs"'" --preproc-only" >> run_image_sub.sh
+        	echo "singularity run --cleanenv --bind $nifti_dir:/nifti_dir,$(pwd)/enigma_ocd:/enigma_ocd,$recon_dir:/recon_dir $image_path/$image_name \
+      /nifti_dir /enigma_ocd --data-dir-structure $nifti_dir_struc --participant-label \$PARTICIPANT_LABEL --work-dir /enigma_ocd --recon-all-dir /recon_dir --n-procs $n_procs --preproc-only" >> run_image_sub.sh
 
     	fi
 		if [ -z "$recon_dir" ]; then
-        	echo "singularity run --cleanenv --bind "'"$nifti_dir"'":/nifti_dir,"'"$(pwd)"'"/enigma_ocd:/enigma_ocd "'"$image_path/$image_name"'" \
-              /nifti_dir /enigma_ocd --data-dir-structure "'"$nifti_dir_struc"'" --work-dir /enigma_ocd --n-procs "'"$n_procs"'" --group-stats-only" >> run_image_stats.sh
+        	echo "singularity run --cleanenv --bind $nifti_dir:/nifti_dir,$(pwd)/enigma_ocd:/enigma_ocd $image_path/$image_name \
+              /nifti_dir /enigma_ocd --data-dir-structure $nifti_dir_struc --work-dir /enigma_ocd --n-procs $n_procs --group-stats-only" >> run_image_stats.sh
     	else
-        	echo "singularity run --cleanenv --bind "'"$nifti_dir"'":/nifti_dir,"'"$(pwd)"'"/enigma_ocd:/enigma_ocd,"'"$recon_dir"'":/recon_dir "'"$image_path/$image_name"'" \
-              /nifti_dir /enigma_ocd --data-dir-structure "'"$nifti_dir_struc"'" --work-dir /enigma_ocd --recon-all-dir /recon_dir --n-procs "'"$n_procs"'" --group-stats-only" >> run_image_stats.sh
+        	echo "singularity run --cleanenv --bind $nifti_dir:/nifti_dir,$(pwd)/enigma_ocd:/enigma_ocd,$recon_dir:/recon_dir $image_path/$image_name \
+              /nifti_dir /enigma_ocd --data-dir-structure $nifti_dir_struc --work-dir /enigma_ocd --recon-all-dir /recon_dir --n-procs $n_procs --group-stats-only" >> run_image_stats.sh
     	fi
 
 	else
@@ -292,11 +292,11 @@ if [ -z "$(ls | grep 'run_image.*\.sh')" ]; then
         	echo "#SBATCH $flag" >> run_image.sh
     	done
     	if [ -z "$recon_dir" ]; then
-        	echo "singularity run --cleanenv --bind "'"$nifti_dir"'":/nifti_dir,"'"$(pwd)"'"/enigma_ocd:/enigma_ocd "'"$image_path/$image_name"'" \
-              /nifti_dir /enigma_ocd --data-dir-structure "'"$nifti_dir_struc"'" --work-dir /enigma_ocd --n-procs "'"$n_procs"'"" >> run_image.sh
+        	echo "singularity run --cleanenv --bind $nifti_dir:/nifti_dir,$(pwd)/enigma_ocd:/enigma_ocd $image_path/$image_name \
+              /nifti_dir /enigma_ocd --data-dir-structure $nifti_dir_struc --work-dir /enigma_ocd --n-procs $n_procs" >> run_image.sh
     	else
-        	echo "singularity run --cleanenv --bind "'"$nifti_dir"'":/nifti_dir,"'"$(pwd)"'"/enigma_ocd:/enigma_ocd,"'"$recon_dir"'":/recon_dir "'"$image_path/$image_name"'" \
-              /nifti_dir /enigma_ocd --data-dir-structure "'"$nifti_dir_struc"'" --work-dir /enigma_ocd --recon-all-dir /recon_dir --n-procs "'"$n_procs"'"" >> run_image.sh
+        	echo "singularity run --cleanenv --bind $nifti_dir:/nifti_dir,$(pwd)/enigma_ocd:/enigma_ocd,$recon_dir:/recon_dir $image_path/$image_name \
+              /nifti_dir /enigma_ocd --data-dir-structure $nifti_dir_struc --work-dir /enigma_ocd --recon-all-dir /recon_dir --n-procs $n_procs" >> run_image.sh
     	fi
 
 	
