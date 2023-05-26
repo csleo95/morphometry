@@ -18,7 +18,7 @@ echo ""
 image_name="morphometry.sif"
 
 # Ask for the path to build the image
-echo -e "\033[1;34m[note]\033[0m Enter the directory path to build the image or press [Enter] for the current directory: \c" 
+echo -e "\033[1;34m[prompt]\033[0m Enter the directory path to build the image or press [Enter] for the current directory: \c" 
 read image_path
         
 # If the image path is empty, set it to the current directory
@@ -336,7 +336,7 @@ if [ "$array_job" = true ]; then
     if [ $sacct_exit_status -ne 0 ]; then
         echo -e "\033[31mThere was a problem retrieving the status of the array job. Please check your configurations and try again.\033[0m"
         exit 1
-    elif [ "$sacct_output" = "COMPLETED" ]; then
+    elif [[ "$sacct_output" == *"COMP"* ]]; then
         echo -e "\033[1;34m[note]\033[0m Array job completed successfully. Submitting the stats job..."
         stats_job_id=$(sbatch --parsable run_image_stats.sh)
         stats_job_exit_status=$?
@@ -375,7 +375,7 @@ else
         if [ $sacct_exit_status -ne 0 ]; then
             echo -e "\033[31mThere was a problem retrieving the status of the job. Please check your configurations and try again.\033[0m"
             exit 1
-        elif [ "$sacct_output" = "COMPLETED" ]; then
+        elif [[ "$sacct_output" == *"COMP"* ]]; then
             echo -e "\033[1;34m[note]\033[0m Job completed successfully."
         else
             echo -e "\033[31mJob did not complete successfully. Please check the slurm-$job_id.out file for more information.\033[0m"
