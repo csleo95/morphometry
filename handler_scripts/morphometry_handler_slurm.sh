@@ -28,14 +28,14 @@ fi
 
 # Check if the image file exists in the current directory
 if [ ! -f "$image_path/$image_name" ]; then
-    echo -e "\033[1;34m[note]\033[0m Image $image_name does not exist in the selected directory - we will write and submit a sbatch script to run it"
+    echo -e "\033[1;34m[note]\033[0m Image $image_name does not exist in the selected directory - we will write and submit a sbatch script to download it"
 
     script_name_build="build_image.sh"
 
     # Check if the build_image.sh file already exists
     if [ -f "$script_name_build" ]; then
         echo -e "\033[1;34m[note]\033[0m $script_name_build script already exists."
-        echo -e "\033[1;34m[prompt]\033[0m Do you want to use it (y) or generate a new one (n)? \c" 
+        echo -e "\033[1;34m[prompt]\033[0m Do you want to use it [y] or generate a new one [n]? \c" 
         read use_existing
     fi
 
