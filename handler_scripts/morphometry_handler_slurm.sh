@@ -28,7 +28,7 @@ fi
 
 # Check if the image file exists in the current directory
 if [ ! -f "$image_path/$image_name" ]; then
-    echo -e "\033[1;34m[note]\033[0m Image $image_name does not exist in the current directory - we will write and submit a sbatch script to run it"
+    echo -e "\033[1;34m[note]\033[0m Image $image_name does not exist in the selected directory - we will write and submit a sbatch script to run it"
 
     script_name_build="build_image.sh"
 
@@ -99,12 +99,12 @@ if [ ! -f "$image_path/$image_name" ]; then
     echo -e "\033[1;34m[note]\033[0m Job $jobid has completed.\n"
 
 else
-    echo -e "\033[1;34m[note]\033[0m Image $image_name exists."
+    echo -e "\033[1;34m[note]\033[0m Image $image_name exists in the selected directory."
 fi
 
-# Check if the image file exists in the current directory
-if [ ! -f "$image_name" ]; then
-    echo -e "\033[1;34m[note]\033[0m The image $image_name does not exist in the current directory."
+# Check if the image file exists in the selected directory
+if [ ! -f "$image_path/$image_name" ]; then
+    echo -e "\033[1;34m[note]\033[0m The image $image_name does not exist in the selected directory."
     echo -e "\033[1;34m[note]\033[0m Please inspect the slurm-$jobid.out file for any errors."
     exit 1
 fi
