@@ -12,6 +12,8 @@ morphometry is an easy-to-use pipeline for preprocessing T1w-MRI data and comput
    :maxdepth: 2
    :caption: Contents:
 
+   running_on_a_desktop_server_ENIGMA_OCD
+
 About
 -----
 
