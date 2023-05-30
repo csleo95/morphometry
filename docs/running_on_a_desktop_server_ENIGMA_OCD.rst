@@ -85,6 +85,7 @@ The user will be prompted to enter the full path to the directory containing out
 If either there are no NIfTI files that have undergone recon-all, or you want to run recon-all again on them, just press ENTER when prompted to enter the path to this directory.
 
 6. Enter the number of threads to be used
+-----------------------------
 The user will be prompted to enter the number of threads to be used in the pipeline. This does not affect the output of the pipeline per se. But it will make the pipeline run faster, as the number of threads corresponds to the number of NIfTI files processed simultaneously. If you are unsure on the number of cores available on your system, just enter 1.
 
 7. Pipeline starts running!
