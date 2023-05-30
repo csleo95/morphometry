@@ -4,9 +4,10 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Running on a desktop server (ENIGMA-OCD) &mdash; morphometry 0.1 documentation</title>
+  <title>Running on a Desktop Server (ENIGMA-OCD) &mdash; morphometry 0.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -43,13 +44,19 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Running on a desktop server (ENIGMA-OCD)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#download-the-handler-script">1. Download the handler script</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#execute-the-handler-script">2. Execute the handler script</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id1">3. Execute the handler script</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#enter-the-full-path-to-the-directory-containing-the-nifti-files">4. Enter the full path to the directory containing the NIfTI files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#enter-the-full-path-to-the-directory-containing-freesurfers-recon-all-output">5. Enter the full path to the directory containing freesurfer’s recon-all output</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#enter-the-number-of-threads-to-be-used">6. Enter the number of threads to be used</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Running on a Desktop Server (ENIGMA-OCD)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#download-the-handler-script">1. Download the Handler Script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#execute-the-handler-script">2. Execute the Handler Script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#set-the-container-platform-to-be-used">3. Set the Container Platform to be Used</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#enter-the-full-path-to-the-directory-containing-the-nifti-files">4. Enter the Full Path to the Directory Containing the NIfTI Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#enter-the-full-path-to-the-directory-containing-freesurfers-recon-all-output">5. Enter the Full Path to the Directory Containing Freesurfer’s recon-all Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#enter-the-number-of-threads-to-be-used">6. Enter the Number of Threads to be Used</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pipeline-starts-running">7. Pipeline Starts Running!</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#preprocessing-workflow">Preprocessing Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#morphometric-statistics-workflow">Morphometric Statistics Workflow</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#check-and-send-the-output">8. Check and Send the Output</a></li>
 </ul>
 </li>
 </ul>
@@ -68,7 +75,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Running on a desktop server (ENIGMA-OCD)</li>
+      <li class="breadcrumb-item active">Running on a Desktop Server (ENIGMA-OCD)</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/running_on_a_desktop_server_ENIGMA_OCD.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -79,105 +86,138 @@
            <div itemprop="articleBody">
              
   <section id="running-on-a-desktop-server-enigma-ocd">
-<h1>Running on a desktop server (ENIGMA-OCD)<a class="headerlink" href="#running-on-a-desktop-server-enigma-ocd" title="Permalink to this heading"></a></h1>
-<p>This section will walk you through running the pipeline step by step, which is accomplished by executing a handler script that takes minimal input from the user and uses it to automatically run the pipeline. In addition, throughout this section, you will find references to items in section 3 that have detailed instructions on how to deal with possible issues. These references are pointed out alongside the body of the text, while their specific subject and location in section 3 are at the bottom of each page.</p>
+<h1>Running on a Desktop Server (ENIGMA-OCD)<a class="headerlink" href="#running-on-a-desktop-server-enigma-ocd" title="Permalink to this heading"></a></h1>
+<p>This guide provides step-by-step instructions for running the pipeline via a handler script. It requires minimal user input and automatically manages the pipeline. Section 3 contains detailed instructions for resolving potential issues.</p>
 <section id="download-the-handler-script">
-<h2>1. Download the handler script<a class="headerlink" href="#download-the-handler-script" title="Permalink to this heading"></a></h2>
+<h2>1. Download the Handler Script<a class="headerlink" href="#download-the-handler-script" title="Permalink to this heading"></a></h2>
 <blockquote>
-<div><ol class="lowerroman simple">
+<div><ul class="simple">
 <li><p>Navigate to <a class="reference external" href="https://github.com/csleo95/morphometry/blob/main/handler_scripts/morphometry_handler.sh">https://github.com/csleo95/morphometry/blob/main/handler_scripts/morphometry_handler.sh</a></p></li>
-<li><p>Click on Download raw file</p></li>
-</ol>
+<li><p>Click on ‘Download raw file’.</p></li>
+</ul>
 </div></blockquote>
 </section>
 <section id="execute-the-handler-script">
-<h2>2. Execute the handler script<a class="headerlink" href="#execute-the-handler-script" title="Permalink to this heading"></a></h2>
+<h2>2. Execute the Handler Script<a class="headerlink" href="#execute-the-handler-script" title="Permalink to this heading"></a></h2>
 <blockquote>
-<div><ol class="lowerroman simple">
-<li><p>Open the terminal</p></li>
-<li><p>Change directory to the directory where the handler script file was downloaded to. For instance, if it was downloaded to the Downloads directory, you can enter the following command:</p></li>
-</ol>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">Downloads</span>
+<div><ul class="simple">
+<li><p>Open the terminal.</p></li>
+<li><p>Change directory to where the handler script file was downloaded.</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/Downloads
 </pre></div>
 </div>
-<ol class="lowerroman simple" start="3">
-<li><p>Make the handler script file executable. To do this, enter the following command:</p></li>
-</ol>
+<ul class="simple">
+<li><p>Make the handler script file executable.</p></li>
+<li><p>Execute the handler script file.</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./morphometry_handler.sh
+</pre></div>
+</div>
 </div></blockquote>
-<dl class="simple">
-<dt>chmod +x morphometry_handler.sh</dt><dd><ol class="lowerroman simple" start="4">
-<li><p>Execute the handler script file. To do this, enter the following command:</p></li>
-</ol>
-</dd>
-</dl>
-<p>./morphometry_handler.sh</p>
 </section>
-<section id="id1">
-<h2>3. Execute the handler script<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
-<p>The output of the handler script will depend on the container platforms installed (or not) in the server:</p>
-<p>Neither Docker, nor Singularity are installed: the script will print a message requesting that one of these should be installed in the system and will exit. In this case, follow this instruction and execute again the handler script.
-Only Docker is installed: the script will look for the pipeline image among the local images. If it has not been downloaded yet, it will automatically download the image. The Docker image is 15.39 GB, so please make sure that there is enough room in Docker Desktop to download it. If it has already been downloaded, the handler script will proceed to the next step.
-Only Singularity is installed: the script will look for the pipeline image in the current folder. If it has not been downloaded yet, it will automatically download the image. The pipeline Singularity image is 6.5 GB, so please make sure that there is enough room in the system to download it. If it has already been downloaded, the handler script will proceed to the next step.
-Both Docker and Singularity are installed: the script will prompt the user to select one of these platforms to use for executing the pipeline. If you enter 1, Docker is selected, and the handler script will follow the steps described in the Only Docker is installed item above. If you enter 2, Singularity is selected, and the handler script will follow the steps described in the Only Singularity is installed item above.</p>
+<section id="set-the-container-platform-to-be-used">
+<h2>3. Set the Container Platform to be Used<a class="headerlink" href="#set-the-container-platform-to-be-used" title="Permalink to this heading"></a></h2>
+<p>The script interacts with the container platforms installed on the server:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>If neither Docker nor Singularity is installed, the script will request installation and then exit.</p></li>
+<li><p>If Docker is installed, the script will search for the pipeline image among local images. If not found, it will download the image (size: 15.39 GB). If found, it proceeds to the next step.</p></li>
+<li><p>If Singularity is installed, the script will search for the pipeline image in the current folder. If not found, it will download the image (size: 6.5 GB). If found, it proceeds to the next step.</p></li>
+<li><p>If both Docker and Singularity are installed, the script will prompt the user to select one of these platforms for executing the pipeline.</p></li>
+</ul>
+</div></blockquote>
 </section>
 <section id="enter-the-full-path-to-the-directory-containing-the-nifti-files">
-<h2>4. Enter the full path to the directory containing the NIfTI files<a class="headerlink" href="#enter-the-full-path-to-the-directory-containing-the-nifti-files" title="Permalink to this heading"></a></h2>
-<p>The user will be prompted to enter the full path to the directory containing the NIfTI files of the T1 scans of the subjects. This directory can be located either in the user filesystem or in a mounted drive. In either case, it should be noted that the full path is required, without characters such as “~/’, nor environment variables. Accordingly, a full path would have a structure similar to the following:</p>
-<p>1) Full path to directory with NIfTI files: /home/leocs/imgs/nifti
-The directory with the NIfTI files can be structured in two formats. It can contain only the NIfTI files of the T1 scans, as in the following example:</p>
-<p>├── nifti
-│   ├── sub0001_ses-01_acq-VBM6minSENSE_rec-TOC_run-1_T1w.nii.gz
-│   ├── sub0002_ses-01_acq-VBM6minSENSE_rec-TOC_run-1_T1w.nii.gz
-Alternatively, it can contain the NIfTI files of the T1 scans in valid BIDS format, as in the following example (the ses directory is optional):</p>
-<p>├── nifti
-│   └── sub-0001
-│       └── ses-01
-│                └── anat
-│                    ├── sub-0001_ses-01_acq-VBMSENSE_rec-TOC_run-1_T1w.nii.gz
-│   └── sub-0002
-│       └── ses-01
-│                └── anat
-│                    ├── sub-0002_ses-01_acq-VBMSENSE_rec-TOC_run-1_T1w.nii.gz</p>
+<h2>4. Enter the Full Path to the Directory Containing the NIfTI Files<a class="headerlink" href="#enter-the-full-path-to-the-directory-containing-the-nifti-files" title="Permalink to this heading"></a></h2>
+<p>The user needs to provide the full path to the directory containing the NIfTI files of the T1 scans. The directory can be in the user filesystem or a mounted drive. The full path is required, without characters such as “~/”, nor environment variables.</p>
+<blockquote>
+<div><p>Example of full path:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/home/leocs/imgs/nifti
+</pre></div>
+</div>
+</div></blockquote>
+<p>The NIfTI files can be structured in two ways: either only containing the T1 scans or containing the T1 scans in valid BIDS format.</p>
+<blockquote>
+<div><p>Examples:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>├──<span class="w"> </span>nifti
+│<span class="w">   </span>├──<span class="w"> </span>sub0001_ses-01_acq-VBM6minSENSE_rec-TOC_run-1_T1w.nii.gz
+│<span class="w">   </span>├──<span class="w"> </span>sub0002_ses-01_acq-VBM6minSENSE_rec-TOC_run-1_T1w.nii.gz
+
+├──<span class="w"> </span>nifti
+│<span class="w">   </span>└──<span class="w"> </span>sub-0001
+│<span class="w">       </span>└──<span class="w"> </span>ses-01
+│<span class="w">               </span>└──<span class="w"> </span>anat
+│<span class="w">                   </span>├──<span class="w"> </span>sub-0001_ses-01_acq-VBMSENSE_rec-TOC_run-1_T1w.nii.gz
+│<span class="w">   </span>└──<span class="w"> </span>sub-0002
+│<span class="w">       </span>└──<span class="w"> </span>ses-01
+│<span class="w">               </span>└──<span class="w"> </span>anat
+│<span class="w">                   </span>├──<span class="w"> </span>sub-0002_ses-01_acq-VBMSENSE_rec-TOC_run-1_T1w.nii.gz
+</pre></div>
+</div>
+</div></blockquote>
 </section>
 <section id="enter-the-full-path-to-the-directory-containing-freesurfers-recon-all-output">
-<h2>5. Enter the full path to the directory containing freesurfer’s recon-all output<a class="headerlink" href="#enter-the-full-path-to-the-directory-containing-freesurfers-recon-all-output" title="Permalink to this heading"></a></h2>
-<p>The user will be prompted to enter the full path to the directory containing output from the freesurfer’s recon-all command for some / all NIfTI files located in the directory with the NIfTI files. This directory can also be located in the user filesystem or in a mounted drive; and the path requirements are the same as above. In addition, it should be noted that the directories within this directory should have the same naming as their corresponding NIfTI files (without the file extensions, of course). Accordingly, considering that the provided directory with NIfTI files was any of the examples above, this directory should have the following structure and naming:</p>
-<p>├── reconall
-│   └── sub-0001_ses-01_acq-VBM6minSENSE_rec-TOC_run-1_T1w
-│       ├── label
-│       ├── mri
-│       ├── scripts
-│       ├── stats
-│       ├── surf
-│       ├── tmp
-│       ├── touch
-│       └── trash
-│   └── sub-0002_ses-01_acq-VBM6minSENSE_rec-TOC_run-1_T1w
-│       ├── label
-│       ├── mri
-│       ├── scripts
-│       ├── stats
-│       ├── surf
-│       ├── tmp
-│       ├── touch
-│       └── trash
-If either there are no NIfTI files that have undergone recon-all, or you want to run recon-all again on them, just press ENTER when prompted to enter the path to this directory.</p>
+<h2>5. Enter the Full Path to the Directory Containing Freesurfer’s recon-all Output<a class="headerlink" href="#enter-the-full-path-to-the-directory-containing-freesurfers-recon-all-output" title="Permalink to this heading"></a></h2>
+<p>The user needs to provide the full path to the directory containing the output from Freesurfer’s recon-all command. The directories within this directory should have the same naming as their corresponding NIfTI files (without the file extensions).</p>
+<p># The text was too long for a single output. I’m splitting it into two parts. Here is the continuation of the cosmetic version of the text.</p>
+<dl>
+<dt>quote(“””</dt><dd><p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>├──<span class="w"> </span>reconall
+│<span class="w">   </span>└──<span class="w"> </span>sub-0001_ses-01_acq-VBM6minSENSE_rec-TOC_run-1_T1w
+│<span class="w">       </span>├──<span class="w"> </span>label
+│<span class="w">       </span>├──<span class="w"> </span>mri
+│<span class="w">       </span>├──<span class="w"> </span>scripts
+│<span class="w">       </span>├──<span class="w"> </span>stats
+│<span class="w">       </span>├──<span class="w"> </span>surf
+│<span class="w">       </span>├──<span class="w"> </span>tmp
+│<span class="w">       </span>├──<span class="w"> </span>touch
+│<span class="w">       </span>└──<span class="w"> </span>trash
+│<span class="w">   </span>└──<span class="w"> </span>sub-0002_ses-01_acq-VBM6minSENSE_rec-TOC_run-1_T1w
+│<span class="w">       </span>├──<span class="w"> </span>label
+│<span class="w">       </span>├──<span class="w"> </span>mri
+│<span class="w">       </span>├──<span class="w"> </span>scripts
+│<span class="w">       </span>├──<span class="w"> </span>stats
+│<span class="w">       </span>├──<span class="w"> </span>surf
+│<span class="w">       </span>├──<span class="w"> </span>tmp
+│<span class="w">       </span>├──<span class="w"> </span>touch
+│<span class="w">       </span>└──<span class="w"> </span>trash
+</pre></div>
+</div>
+</dd>
+</dl>
+<p>If there are no NIfTI files that have undergone recon-all, or if you want to run recon-all again, just press ENTER when prompted.</p>
 </section>
 <section id="enter-the-number-of-threads-to-be-used">
-<h2>6. Enter the number of threads to be used<a class="headerlink" href="#enter-the-number-of-threads-to-be-used" title="Permalink to this heading"></a></h2>
-<p>The user will be prompted to enter the number of threads to be used in the pipeline. This does not affect the output of the pipeline per se. But it will make the pipeline run faster, as the number of threads corresponds to the number of NIfTI files processed simultaneously. If you are unsure on the number of cores available on your system, just enter 1.</p>
-<p>7. Pipeline starts running!
-The pipeline is comprised of this two workflows:</p>
-<p>Preproc workflow
-Runs recon-all for all the NIfTI files that were not previously processed with this command, processed with freesurfer versions &lt; 7.1.1, or processed with errors.
-Runs run_samseg for all the NIfTI files. The output of this command will be stored in a directory named samseg inside the enigma_ocd directory.
-Gathers qc statistics.
-Morphometric stats workflow
-Computes area, volume, thickness, intrinsic and extrinsic curvatures, and sulcal depth statistics for cortical regions.
-Computes area, and volume statistics for subcortical regions.
-Gathers qc statistics.
-8. Check and send the output
-After running the pipeline, please check all the files in the directory enigma-ocd/morhometric_stats to <a class="reference external" href="mailto:leonardo&#46;saraiva&#37;&#52;&#48;usp&#46;br">leonardo<span>&#46;</span>saraiva<span>&#64;</span>usp<span>&#46;</span>br</a>.</p>
+<h2>6. Enter the Number of Threads to be Used<a class="headerlink" href="#enter-the-number-of-threads-to-be-used" title="Permalink to this heading"></a></h2>
+<p>The user will be prompted to enter the number of threads to be used in the pipeline. This number corresponds to the number of NIfTI files processed simultaneously. If unsure of the number of cores available on your system, enter 1.</p>
+</section>
+<section id="pipeline-starts-running">
+<h2>7. Pipeline Starts Running!<a class="headerlink" href="#pipeline-starts-running" title="Permalink to this heading"></a></h2>
+<p>The pipeline runs in two main workflows:</p>
+<section id="preprocessing-workflow">
+<h3>Preprocessing Workflow<a class="headerlink" href="#preprocessing-workflow" title="Permalink to this heading"></a></h3>
+<p>This workflow does the following:</p>
+<ul class="simple">
+<li><p>Runs <cite>recon-all</cite> for all the NIfTI files that were not previously processed with this command, processed with freesurfer versions less than 7.1.1, or processed with errors.</p></li>
+<li><p>Runs <cite>run_samseg</cite> for all the NIfTI files. The output of this command will be stored in a directory named <cite>samseg</cite> inside the <cite>enigma_ocd</cite> directory.</p></li>
+<li><p>Gathers quality control (QC) statistics.</p></li>
+</ul>
+</section>
+<section id="morphometric-statistics-workflow">
+<h3>Morphometric Statistics Workflow<a class="headerlink" href="#morphometric-statistics-workflow" title="Permalink to this heading"></a></h3>
+<p>This workflow does the following:</p>
+<ul class="simple">
+<li><p>Computes area, volume, thickness, intrinsic and extrinsic curvatures, and sulcal depth statistics for cortical regions.</p></li>
+<li><p>Computes area, and volume statistics for subcortical regions.</p></li>
+<li><p>Gathers QC statistics.</p></li>
+</ul>
+</section>
+</section>
+<section id="check-and-send-the-output">
+<h2>8. Check and Send the Output<a class="headerlink" href="#check-and-send-the-output" title="Permalink to this heading"></a></h2>
+<p>After running the pipeline, please check all the files in the directory <cite>enigma-ocd/morhometric_stats</cite> and send them to <a class="reference external" href="mailto:leonardo&#46;saraiva&#37;&#52;&#48;usp&#46;br">leonardo<span>&#46;</span>saraiva<span>&#64;</span>usp<span>&#46;</span>br</a>.
+“””, “”)</p>
 </section>
 </section>
 
