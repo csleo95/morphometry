@@ -14,12 +14,14 @@ section 3 are at the bottom of each page.
     ii. Click on Download raw file
 
 2. Execute the handler script
------
-    i. Open the terminal
-    ii. Change directory to the directory where the handler script file was downloaded to. For instance, if it was downloaded to the Downloads directory, you can enter the following command:
+-----------------------------
+    i. Open the terminalt
+    ii. Change directory to the directory where the handler script file was downloaded to. For instance, if it was downloaded to the Downloads directory, you can enter the following command::
 
-cd ~/Downloads
+        cd ~/Downloads
+
     iii. Make the handler script file executable. To do this, enter the following command:
+
 
 chmod +x morphometry_handler.sh
     iv. Execute the handler script file. To do this, enter the following command:
