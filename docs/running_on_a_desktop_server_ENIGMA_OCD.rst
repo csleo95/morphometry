@@ -1,7 +1,12 @@
 Running on a desktop server (ENIGMA-OCD)
 ============
 
-This section will walk you through running the pipeline step by step, which is accomplished by executing a handler script that takes minimal input from the user and uses it to automatically run the pipeline. In addition, throughout this section, you will find references to items in section 3 that have detailed instructions on how to deal with possible issues. These references are pointed out alongside the body of the text, while their specific subject and location in section 3 are at the bottom of each page.
+This section will walk you through running the pipeline step by step, which is accomplished by \
+executing a handler script that takes minimal input from the user and uses it to automatically \
+run the pipeline. In addition, throughout this section, you will find references to items in \
+section 3 that have detailed instructions on how to deal with possible issues. These references \
+are pointed out alongside the body of the text, while their specific subject and location in \
+section 3 are at the bottom of each page.
 
 1. Download the handler script
 -----
