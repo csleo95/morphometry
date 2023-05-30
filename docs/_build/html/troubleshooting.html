@@ -53,6 +53,16 @@
 <li class="toctree-l3"><a class="reference internal" href="#singularity-less-v3">Using Singularity (version &lt; 3.0)</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#neither-docker-nor-singularity-are-installed-in-the-system">Neither Docker, nor Singularity are installed in the system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#docker-daemon-is-not-running">Docker daemon is not running</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#not-enough-available-hard-disk-space-in-docker-to-download-the-pipeline-image">Not enough available hard disk space in Docker to download the pipeline image</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#delete-local-images">Delete local images</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#delete-unused-data">Delete unused data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#increase-the-available-disk-space-allocated-to-docker-desktop">Increase the available disk space allocated to Docker Desktop</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#server-with-singularity-version-3-0">Server with Singularity version &lt; 3.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#docker-does-not-recognize-the-path-of-my-directories">Docker does not recognize the path of my directories</a></li>
 </ul>
 </li>
 </ul>
@@ -93,6 +103,17 @@
 <li><p><a class="reference internal" href="#singularity-less-v3" id="id6">Using Singularity (version &lt; 3.0)</a></p></li>
 </ul>
 </li>
+<li><p><a class="reference internal" href="#neither-docker-nor-singularity-are-installed-in-the-system" id="id7">Neither Docker, nor Singularity are installed in the system</a></p></li>
+<li><p><a class="reference internal" href="#docker-daemon-is-not-running" id="id8">Docker daemon is not running</a></p></li>
+<li><p><a class="reference internal" href="#not-enough-available-hard-disk-space-in-docker-to-download-the-pipeline-image" id="id9">Not enough available hard disk space in Docker to download the pipeline image</a></p>
+<ul>
+<li><p><a class="reference internal" href="#delete-local-images" id="id10">Delete local images</a></p></li>
+<li><p><a class="reference internal" href="#delete-unused-data" id="id11">Delete unused data</a></p></li>
+<li><p><a class="reference internal" href="#increase-the-available-disk-space-allocated-to-docker-desktop" id="id12">Increase the available disk space allocated to Docker Desktop</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#server-with-singularity-version-3-0" id="id13">Server with Singularity version &lt; 3.0</a></p></li>
+<li><p><a class="reference internal" href="#docker-does-not-recognize-the-path-of-my-directories" id="id14">Docker does not recognize the path of my directories</a></p></li>
 </ul>
 </nav>
 <section id="my-server-does-not-have-internet-access">
@@ -149,6 +170,80 @@
 <li><p>Transfer the handler script file (run_img_trs.sh) and the SIMG file of the pipeline (img_trs.simg) to your server without internet connection</p></li>
 </ol>
 </section>
+</section>
+<section id="neither-docker-nor-singularity-are-installed-in-the-system">
+<span id="no-docker-singularity"></span><h2><a class="toc-backref" href="#id7" role="doc-backlink">Neither Docker, nor Singularity are installed in the system</a><a class="headerlink" href="#neither-docker-nor-singularity-are-installed-in-the-system" title="Permalink to this heading"></a></h2>
+<p>If neither Docker nor Singularity are installed on the system, please install one of them. You can do this by following the instructions in one of the links below (you will need root access to go through them):</p>
+<ul class="simple">
+<li><p>Latest Docker version on Linux: <a class="reference external" href="https://docs.docker.com/desktop/install/linux-install/test">Docker on Linux</a></p></li>
+<li><p>Latest Docker version on Mac: <a class="reference external" href="https://docs.docker.com/desktop/install/mac-install/">Docker on Mac</a></p></li>
+<li><p>Latest Docker version on Windows: <a class="reference external" href="https://docs.docker.com/desktop/install/windows-install/">Docker on Windows</a></p></li>
+<li><p>Latest Singularity version on Linux, Mac, or Windows: <a class="reference external" href="https://docs.sylabs.io/guides/3.10/user-guide/quick_start.html">Singularity Quick Start Guide</a></p></li>
+</ul>
+</section>
+<section id="docker-daemon-is-not-running">
+<span id="docker-daemon"></span><h2><a class="toc-backref" href="#id8" role="doc-backlink">Docker daemon is not running</a><a class="headerlink" href="#docker-daemon-is-not-running" title="Permalink to this heading"></a></h2>
+<p>If the Docker daemon is not running, the handler script will output a message of this sort:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Cannot connect to the Docker daemon at unix:///home/leocs/.docker/desktop/docker.sock. Is the docker daemon running?
+</pre></div>
+</div>
+<p>You will need to have Docker installed on the other server with internet access. In this case, you can follow the steps below:</p>
+<ol class="arabic">
+<li><p>You can search Docker Desktop on the Applications menu and open it.</p></li>
+<li><p>Alternatively, you can run the following command on the terminal:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>systemctl –user start docker-desktop
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="not-enough-available-hard-disk-space-in-docker-to-download-the-pipeline-image">
+<span id="nohard-disk"></span><h2><a class="toc-backref" href="#id9" role="doc-backlink">Not enough available hard disk space in Docker to download the pipeline image</a><a class="headerlink" href="#not-enough-available-hard-disk-space-in-docker-to-download-the-pipeline-image" title="Permalink to this heading"></a></h2>
+<p>If there is not enough available space in the hard disk allocated to Docker, the handler script will print a message of this sort:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">No</span> <span class="n">space</span> <span class="n">left</span> <span class="n">on</span> <span class="n">the</span> <span class="n">device</span>
+</pre></div>
+</div>
+<p>There are three ways to increase the available hard disk space in Docker Desktop (you can try a combination of more than one):</p>
+<section id="delete-local-images">
+<h3><a class="toc-backref" href="#id10" role="doc-backlink">Delete local images</a><a class="headerlink" href="#delete-local-images" title="Permalink to this heading"></a></h3>
+<p>There are two ways of doing this:</p>
+<ol class="arabic simple">
+<li><p>Open Docker Desktop and delete local images by clicking on the three dots on the left of an image’s row and then clicking on remove.</p></li>
+<li><p>Alternatively, enter the command <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">image</span> <span class="pre">rm</span> <span class="pre">[image</span> <span class="pre">name]</span></code>, for instance:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>image<span class="w"> </span>rm<span class="w"> </span>hello-world
+</pre></div>
+</div>
+</section>
+<section id="delete-unused-data">
+<h3><a class="toc-backref" href="#id11" role="doc-backlink">Delete unused data</a><a class="headerlink" href="#delete-unused-data" title="Permalink to this heading"></a></h3>
+<p>Enter the following command to delete unused containers, networks, images:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>system<span class="w"> </span>prune
+</pre></div>
+</div>
+</section>
+<section id="increase-the-available-disk-space-allocated-to-docker-desktop">
+<h3><a class="toc-backref" href="#id12" role="doc-backlink">Increase the available disk space allocated to Docker Desktop</a><a class="headerlink" href="#increase-the-available-disk-space-allocated-to-docker-desktop" title="Permalink to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Open Docker Desktop and click on the Settings button.</p></li>
+<li><p>Click on the Resources button.</p></li>
+<li><p>Increase the Disk image size of Docker Desktop.</p></li>
+</ol>
+<p>Remember to save the content above in a single .rst file.</p>
+</section>
+</section>
+<section id="server-with-singularity-version-3-0">
+<span id="lower-sing"></span><h2><a class="toc-backref" href="#id13" role="doc-backlink">Server with Singularity version &lt; 3.0</a><a class="headerlink" href="#server-with-singularity-version-3-0" title="Permalink to this heading"></a></h2>
+<p>In this case, the handler script will use the docker2singularity utility to download the pipeline image from Docker Hub and convert it to a format compatible with the Singularity version on the server. However, for this to work, Docker must be installed on the server. If it is not installed on your server, please go through the steps 3.1.2.c to 3.1.4.c to download the pipeline image from another server with Docker installed and then transfer the image to your server.</p>
+</section>
+<section id="docker-does-not-recognize-the-path-of-my-directories">
+<span id="not-recog"></span><h2><a class="toc-backref" href="#id14" role="doc-backlink">Docker does not recognize the path of my directories</a><a class="headerlink" href="#docker-does-not-recognize-the-path-of-my-directories" title="Permalink to this heading"></a></h2>
+<p>If are using Docker to run the pipeline and the directory with NIfTI files and/or the directory with freesurfer’s recon-all output are located in paths not shared with Docker, an error message of this sort will be print:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker:<span class="w"> </span>Error<span class="w"> </span>response<span class="w"> </span>from<span class="w"> </span>daemon:<span class="w"> </span>Mounts<span class="w"> </span>denied:
+</pre></div>
+</div>
+<p>The path /media/leocs/leo.hd/DRIVE/ img_trs not shared from the host and is not known to Docker.</p>
+<p>To deal with this, go to docker desktop menu, and click on the File sharing button and add the path(s) to the directory with NIfTI files and/or the directory with freesurfer’s recon-all.</p>
 </section>
 </section>
 

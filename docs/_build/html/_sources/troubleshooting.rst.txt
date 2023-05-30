@@ -69,3 +69,106 @@ You will need to have Docker installed on the other server with internet access.
 
 3. Transfer the handler script file (run_img_trs.sh) and the SIMG file of the pipeline (img_trs.simg) to your server without internet connection
 
+
+.. _no-docker-singularity:
+
+----------------------------------------------
+Neither Docker, nor Singularity are installed in the system
+----------------------------------------------
+
+If neither Docker nor Singularity are installed on the system, please install one of them. You can do this by following the instructions in one of the links below (you will need root access to go through them):
+
+• Latest Docker version on Linux: `Docker on Linux <https://docs.docker.com/desktop/install/linux-install/test>`__
+• Latest Docker version on Mac: `Docker on Mac <https://docs.docker.com/desktop/install/mac-install/>`__
+• Latest Docker version on Windows: `Docker on Windows <https://docs.docker.com/desktop/install/windows-install/>`__
+• Latest Singularity version on Linux, Mac, or Windows: `Singularity Quick Start Guide <https://docs.sylabs.io/guides/3.10/user-guide/quick_start.html>`__
+
+
+.. _docker-daemon:
+
+----------------------------------------------
+Docker daemon is not running
+----------------------------------------------
+
+If the Docker daemon is not running, the handler script will output a message of this sort::
+
+    Cannot connect to the Docker daemon at unix:///home/leocs/.docker/desktop/docker.sock. Is the docker daemon running?
+
+You will need to have Docker installed on the other server with internet access. In this case, you can follow the steps below:
+
+1. You can search Docker Desktop on the Applications menu and open it.
+2. Alternatively, you can run the following command on the terminal::
+
+    systemctl –user start docker-desktop
+
+
+.. _nohard_disk:
+
+----------------------------------------------
+Not enough available hard disk space in Docker to download the pipeline image
+----------------------------------------------
+
+If there is not enough available space in the hard disk allocated to Docker, the handler script will print a message of this sort::
+
+    No space left on the device
+
+
+There are three ways to increase the available hard disk space in Docker Desktop (you can try a combination of more than one):
+
+Delete local images
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+There are two ways of doing this:
+
+1. Open Docker Desktop and delete local images by clicking on the three dots on the left of an image's row and then clicking on remove.
+
+2. Alternatively, enter the command ``docker image rm [image name]``, for instance:
+
+.. code-block:: bash
+
+    docker image rm hello-world
+
+Delete unused data
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Enter the following command to delete unused containers, networks, images:
+
+.. code-block:: bash
+
+    docker system prune
+
+Increase the available disk space allocated to Docker Desktop
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1. Open Docker Desktop and click on the Settings button.
+
+2. Click on the Resources button.
+
+3. Increase the Disk image size of Docker Desktop.
+
+Remember to save the content above in a single .rst file.
+
+
+.. _lower_sing:
+
+----------------------------------------------
+Server with Singularity version < 3.0
+----------------------------------------------
+
+In this case, the handler script will use the docker2singularity utility to download the pipeline image from Docker Hub and convert it to a format compatible with the Singularity version on the server. However, for this to work, Docker must be installed on the server. If it is not installed on your server, please go through the steps 3.1.2.c to 3.1.4.c to download the pipeline image from another server with Docker installed and then transfer the image to your server.
+
+
+.. _not_recog:
+
+----------------------------------------------
+Docker does not recognize the path of my directories
+----------------------------------------------
+
+If are using Docker to run the pipeline and the directory with NIfTI files and/or the directory with freesurfer’s recon-all output are located in paths not shared with Docker, an error message of this sort will be print:
+
+.. code-block:: bash
+
+    docker: Error response from daemon: Mounts denied: 
+The path /media/leocs/leo.hd/DRIVE/ img_trs not shared from the host and is not known to Docker.
+
+To deal with this, go to docker desktop menu, and click on the File sharing button and add the path(s) to the directory with NIfTI files and/or the directory with freesurfer’s recon-all.
