@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Running on a desktop server (ENIGMA-OCD) &mdash; morphometry 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Welcome to morphometry’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            morphometry
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Running on a desktop server (ENIGMA-OCD)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#download-the-handler-script">1. Download the handler script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#execute-the-handler-script">2. Execute the handler script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">3. Execute the handler script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#enter-the-full-path-to-the-directory-containing-the-nifti-files">4. Enter the full path to the directory containing the NIfTI files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#enter-the-full-path-to-the-directory-containing-freesurfers-recon-all-output">5. Enter the full path to the directory containing freesurfer’s recon-all output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#enter-the-number-of-threads-to-be-used">6. Enter the number of threads to be used</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">morphometry</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Running on a desktop server (ENIGMA-OCD)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/running_on_a_desktop_server_ENIGMA_OCD.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="running-on-a-desktop-server-enigma-ocd">
+<h1>Running on a desktop server (ENIGMA-OCD)<a class="headerlink" href="#running-on-a-desktop-server-enigma-ocd" title="Permalink to this heading"></a></h1>
+<p>This section will walk you through running the pipeline step by step, which is accomplished by executing a handler script that takes minimal input from the user and uses it to automatically run the pipeline. In addition, throughout this section, you will find references to items in section 3 that have detailed instructions on how to deal with possible issues. These references are pointed out alongside the body of the text, while their specific subject and location in section 3 are at the bottom of each page.</p>
+<section id="download-the-handler-script">
+<h2>1. Download the handler script<a class="headerlink" href="#download-the-handler-script" title="Permalink to this heading"></a></h2>
+<blockquote>
+<div><ol class="lowerroman simple">
+<li><p>Navigate to <a class="reference external" href="https://github.com/csleo95/morphometry/blob/main/handler_scripts/morphometry_handler.sh">https://github.com/csleo95/morphometry/blob/main/handler_scripts/morphometry_handler.sh</a></p></li>
+<li><p>Click on Download raw file</p></li>
+</ol>
+</div></blockquote>
+</section>
+<section id="execute-the-handler-script">
+<h2>2. Execute the handler script<a class="headerlink" href="#execute-the-handler-script" title="Permalink to this heading"></a></h2>
+<blockquote>
+<div><ol class="lowerroman">
+<li><p>Open the terminalt</p></li>
+<li><p>Change directory to the directory where the handler script file was downloaded to. For instance, if it was downloaded to the Downloads directory, you can enter the following command:</p>
+<p>cd ~/Downloads</p>
+</li>
+<li><p>Make the handler script file executable. To do this, enter the following command:</p></li>
+</ol>
+</div></blockquote>
+<dl class="simple">
+<dt>chmod +x morphometry_handler.sh</dt><dd><ol class="lowerroman simple" start="4">
+<li><p>Execute the handler script file. To do this, enter the following command:</p></li>
+</ol>
+</dd>
+</dl>
+<p>./morphometry_handler.sh</p>
+</section>
+<section id="id1">
+<h2>3. Execute the handler script<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+<p>The output of the handler script will depend on the container platforms installed (or not) in the server:</p>
+<p>Neither Docker, nor Singularity are installed: the script will print a message requesting that one of these should be installed in the system and will exit. In this case, follow this instruction and execute again the handler script.
+Only Docker is installed: the script will look for the pipeline image among the local images. If it has not been downloaded yet, it will automatically download the image. The Docker image is 15.39 GB, so please make sure that there is enough room in Docker Desktop to download it. If it has already been downloaded, the handler script will proceed to the next step.
+Only Singularity is installed: the script will look for the pipeline image in the current folder. If it has not been downloaded yet, it will automatically download the image. The pipeline Singularity image is 6.5 GB, so please make sure that there is enough room in the system to download it. If it has already been downloaded, the handler script will proceed to the next step.
+Both Docker and Singularity are installed: the script will prompt the user to select one of these platforms to use for executing the pipeline. If you enter 1, Docker is selected, and the handler script will follow the steps described in the Only Docker is installed item above. If you enter 2, Singularity is selected, and the handler script will follow the steps described in the Only Singularity is installed item above.</p>
+</section>
+<section id="enter-the-full-path-to-the-directory-containing-the-nifti-files">
+<h2>4. Enter the full path to the directory containing the NIfTI files<a class="headerlink" href="#enter-the-full-path-to-the-directory-containing-the-nifti-files" title="Permalink to this heading"></a></h2>
+<p>The user will be prompted to enter the full path to the directory containing the NIfTI files of the T1 scans of the subjects. This directory can be located either in the user filesystem or in a mounted drive. In either case, it should be noted that the full path is required, without characters such as “~/’, nor environment variables. Accordingly, a full path would have a structure similar to the following:</p>
+<p>1) Full path to directory with NIfTI files: /home/leocs/imgs/nifti
+The directory with the NIfTI files can be structured in two formats. It can contain only the NIfTI files of the T1 scans, as in the following example:</p>
+<p>├── nifti
+│   ├── sub0001_ses-01_acq-VBM6minSENSE_rec-TOC_run-1_T1w.nii.gz
+│   ├── sub0002_ses-01_acq-VBM6minSENSE_rec-TOC_run-1_T1w.nii.gz
+Alternatively, it can contain the NIfTI files of the T1 scans in valid BIDS format, as in the following example (the ses directory is optional):</p>
+<p>├── nifti
+│   └── sub-0001
+│       └── ses-01
+│                └── anat
+│                    ├── sub-0001_ses-01_acq-VBMSENSE_rec-TOC_run-1_T1w.nii.gz
+│   └── sub-0002
+│       └── ses-01
+│                └── anat
+│                    ├── sub-0002_ses-01_acq-VBMSENSE_rec-TOC_run-1_T1w.nii.gz</p>
+</section>
+<section id="enter-the-full-path-to-the-directory-containing-freesurfers-recon-all-output">
+<h2>5. Enter the full path to the directory containing freesurfer’s recon-all output<a class="headerlink" href="#enter-the-full-path-to-the-directory-containing-freesurfers-recon-all-output" title="Permalink to this heading"></a></h2>
+<p>The user will be prompted to enter the full path to the directory containing output from the freesurfer’s recon-all command for some / all NIfTI files located in the directory with the NIfTI files. This directory can also be located in the user filesystem or in a mounted drive; and the path requirements are the same as above. In addition, it should be noted that the directories within this directory should have the same naming as their corresponding NIfTI files (without the file extensions, of course). Accordingly, considering that the provided directory with NIfTI files was any of the examples above, this directory should have the following structure and naming:</p>
+<p>├── reconall
+│   └── sub-0001_ses-01_acq-VBM6minSENSE_rec-TOC_run-1_T1w
+│       ├── label
+│       ├── mri
+│       ├── scripts
+│       ├── stats
+│       ├── surf
+│       ├── tmp
+│       ├── touch
+│       └── trash
+│   └── sub-0002_ses-01_acq-VBM6minSENSE_rec-TOC_run-1_T1w
+│       ├── label
+│       ├── mri
+│       ├── scripts
+│       ├── stats
+│       ├── surf
+│       ├── tmp
+│       ├── touch
+│       └── trash
+If either there are no NIfTI files that have undergone recon-all, or you want to run recon-all again on them, just press ENTER when prompted to enter the path to this directory.</p>
+</section>
+<section id="enter-the-number-of-threads-to-be-used">
+<h2>6. Enter the number of threads to be used<a class="headerlink" href="#enter-the-number-of-threads-to-be-used" title="Permalink to this heading"></a></h2>
+<p>The user will be prompted to enter the number of threads to be used in the pipeline. This does not affect the output of the pipeline per se. But it will make the pipeline run faster, as the number of threads corresponds to the number of NIfTI files processed simultaneously. If you are unsure on the number of cores available on your system, just enter 1.</p>
+<p>7. Pipeline starts running!
+The pipeline is comprised of this two workflows:</p>
+<p>Preproc workflow
+Runs recon-all for all the NIfTI files that were not previously processed with this command, processed with freesurfer versions &lt; 7.1.1, or processed with errors.
+Runs run_samseg for all the NIfTI files. The output of this command will be stored in a directory named samseg inside the enigma_ocd directory.
+Gathers qc statistics.
+Morphometric stats workflow
+Computes area, volume, thickness, intrinsic and extrinsic curvatures, and sulcal depth statistics for cortical regions.
+Computes area, and volume statistics for subcortical regions.
+Gathers qc statistics.
+8. Check and send the output
+After running the pipeline, please check all the files in the directory enigma-ocd/morhometric_stats to <a class="reference external" href="mailto:leonardo&#46;saraiva&#37;&#52;&#48;usp&#46;br">leonardo<span>&#46;</span>saraiva<span>&#64;</span>usp<span>&#46;</span>br</a>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to morphometry’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Leonardo Cardoso Saraiva.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
