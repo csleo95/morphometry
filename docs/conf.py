@@ -40,3 +40,14 @@ sys.path.insert(0, os.path.abspath('../../morphometry/'))
 # -- Configure theme
 def setup(app):
     app.add_css_file('custom.css')
+
+extensions = [
+    'sphinx.ext.autodoc',
+    'sphinx.ext.doctest',
+    'sphinx.ext.todo',
+    'sphinx.ext.coverage',
+    'sphinx.ext.mathjax',
+    'sphinx.ext.autosectionlabel',
+]
+
+

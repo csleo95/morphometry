@@ -2,7 +2,7 @@
 Running on a Desktop Server (ENIGMA-OCD)
 ===========================
 
-This guide provides step-by-step instructions for running the pipeline via a handler script. It requires minimal user input and automatically manages the pipeline. Section 3 contains detailed instructions for resolving potential issues.
+This guide provides step-by-step instructions for running the pipeline in a desktop via a handler script. It requires minimal user input and automatically manages the pipeline. 
 
 1. Download the Handler Script
 ------------------------------
@@ -21,6 +21,11 @@ This guide provides step-by-step instructions for running the pipeline via a han
         cd ~/Downloads
 
     - Make the handler script file executable.
+
+    .. code-block:: bash
+
+        chmod + x morphometry_handler.sh
+
     - Execute the handler script file.
 
     .. code-block:: bash
@@ -73,10 +78,7 @@ The NIfTI files can be structured in two ways: either only containing the T1 sca
 
 The user needs to provide the full path to the directory containing the output from Freesurfer’s recon-all command. The directories within this directory should have the same naming as their corresponding NIfTI files (without the file extensions).
 
-# The text was too long for a single output. I'm splitting it into two parts. Here is the continuation of the cosmetic version of the text.
-
-quote("""
-    Example:
+Example:
 
     .. code-block:: bash
 
@@ -134,4 +136,4 @@ This workflow does the following:
 ----------------------------
 
 After running the pipeline, please check all the files in the directory `enigma-ocd/morhometric_stats` and send them to leonardo.saraiva@usp.br.
-""", "")
+

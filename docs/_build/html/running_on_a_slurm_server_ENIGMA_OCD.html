@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Running on a Desktop Server (ENIGMA-OCD) &mdash; morphometry 0.1 documentation</title>
+  <title>Running on a Slurm Server (ENIGMA-OCD) &mdash; morphometry 0.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -20,8 +20,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Running on a Slurm Server (ENIGMA-OCD)" href="running_on_a_slurm_server_ENIGMA_OCD.html" />
-    <link rel="prev" title="Welcome to morphometry’s documentation!" href="index.html" /> 
+    <link rel="next" title="Troubleshooting" href="troubleshooting.html" />
+    <link rel="prev" title="Running on a Desktop Server (ENIGMA-OCD)" href="running_on_a_desktop_server_ENIGMA_OCD.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -45,10 +45,11 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Running on a Desktop Server (ENIGMA-OCD)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#download-the-handler-script">1. Download the Handler Script</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#execute-the-handler-script">2. Execute the Handler Script</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#set-the-container-platform-to-be-used">3. Set the Container Platform to be Used</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_on_a_desktop_server_ENIGMA_OCD.html">Running on a Desktop Server (ENIGMA-OCD)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Running on a Slurm Server (ENIGMA-OCD)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#download-and-execute-the-handler-script">1. Download and Execute the Handler Script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#provide-input-for-sbatch-script-to-build-pipeline-image">2. Provide Input for sbatch Script to Build Pipeline Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#enter-the-sbatch-flags-for-sbatch-script-s-to-run-pipeline-image">3. Enter the #SBATCH Flags for sbatch Script(s) to Run Pipeline Image</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#enter-the-full-path-to-the-directory-containing-the-nifti-files">4. Enter the Full Path to the Directory Containing the NIfTI Files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#enter-the-full-path-to-the-directory-containing-freesurfers-recon-all-output">5. Enter the Full Path to the Directory Containing Freesurfer’s recon-all Output</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#enter-the-number-of-threads-to-be-used">6. Enter the Number of Threads to be Used</a></li>
@@ -60,7 +61,6 @@
 <li class="toctree-l2"><a class="reference internal" href="#check-and-send-the-output">8. Check and Send the Output</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="running_on_a_slurm_server_ENIGMA_OCD.html">Running on a Slurm Server (ENIGMA-OCD)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
 </ul>
 
@@ -78,9 +78,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Running on a Desktop Server (ENIGMA-OCD)</li>
+      <li class="breadcrumb-item active">Running on a Slurm Server (ENIGMA-OCD)</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/running_on_a_desktop_server_ENIGMA_OCD.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/running_on_a_slurm_server_ENIGMA_OCD.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -88,53 +88,65 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="running-on-a-desktop-server-enigma-ocd">
-<h1>Running on a Desktop Server (ENIGMA-OCD)<a class="headerlink" href="#running-on-a-desktop-server-enigma-ocd" title="Permalink to this heading"></a></h1>
-<p>This guide provides step-by-step instructions for running the pipeline in a desktop via a handler script. It requires minimal user input and automatically manages the pipeline.</p>
-<section id="download-the-handler-script">
-<h2>1. Download the Handler Script<a class="headerlink" href="#download-the-handler-script" title="Permalink to this heading"></a></h2>
+  <section id="running-on-a-slurm-server-enigma-ocd">
+<h1>Running on a Slurm Server (ENIGMA-OCD)<a class="headerlink" href="#running-on-a-slurm-server-enigma-ocd" title="Permalink to this heading"></a></h1>
+<p>This guide provides step-by-step instructions for running the pipeline in a slurm via a handler script. It requires minimal user input and automatically manages the pipeline.</p>
+<section id="download-and-execute-the-handler-script">
+<h2>1. Download and Execute the Handler Script<a class="headerlink" href="#download-and-execute-the-handler-script" title="Permalink to this heading"></a></h2>
 <blockquote>
 <div><ul class="simple">
-<li><p>Navigate to <a class="reference external" href="https://github.com/csleo95/morphometry/blob/main/handler_scripts/morphometry_handler.sh">https://github.com/csleo95/morphometry/blob/main/handler_scripts/morphometry_handler.sh</a></p></li>
-<li><p>Click on ‘Download raw file’.</p></li>
+<li><p>Open the terminal</p></li>
+<li><p>Navigate to the directory where the handler script will be executed</p></li>
+<li><p>Download the hanlder script by either:</p></li>
 </ul>
-</div></blockquote>
-</section>
-<section id="execute-the-handler-script">
-<h2>2. Execute the Handler Script<a class="headerlink" href="#execute-the-handler-script" title="Permalink to this heading"></a></h2>
-<blockquote>
-<div><ul class="simple">
-<li><p>Open the terminal.</p></li>
-<li><p>Change directory to where the handler script file was downloaded.</p></li>
-</ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/Downloads
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-O<span class="w"> </span>https://raw.githubusercontent.com/csleo95/morphometry/main/handler_scripts/morphometry_handler_slurm.sh
+</pre></div>
+</div>
+<p>or:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://raw.githubusercontent.com/csleo95/morphometry/main/handler_scripts/morphometry_handler_slurm.sh
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>Make the handler script file executable.</p></li>
 </ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chmod<span class="w"> </span>+<span class="w"> </span>x<span class="w"> </span>morphometry_handler.sh
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chmod<span class="w"> </span>+<span class="w"> </span>x<span class="w"> </span>morphometry_handler_slurm.sh
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>Execute the handler script file.</p></li>
 </ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./morphometry_handler.sh
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./morphometry_handler_slurm.sh
 </pre></div>
 </div>
 </div></blockquote>
 </section>
-<section id="set-the-container-platform-to-be-used">
-<h2>3. Set the Container Platform to be Used<a class="headerlink" href="#set-the-container-platform-to-be-used" title="Permalink to this heading"></a></h2>
-<p>The script interacts with the container platforms installed on the server:</p>
+<section id="provide-input-for-sbatch-script-to-build-pipeline-image">
+<h2>2. Provide Input for sbatch Script to Build Pipeline Image<a class="headerlink" href="#provide-input-for-sbatch-script-to-build-pipeline-image" title="Permalink to this heading"></a></h2>
 <blockquote>
 <div><ul class="simple">
-<li><p>If neither Docker nor Singularity is installed, the script will request installation and then exit.</p></li>
-<li><p>If Docker is installed, the script will search for the pipeline image among local images. If not found, it will download the image (size: 15.39 GB). If found, it proceeds to the next step.</p></li>
-<li><p>If Singularity is installed, the script will search for the pipeline image in the current folder. If not found, it will download the image (size: 6.5 GB). If found, it proceeds to the next step.</p></li>
-<li><p>If both Docker and Singularity are installed, the script will prompt the user to select one of these platforms for executing the pipeline.</p></li>
+<li><p>Enter the path to the directory where the pipeline image will be built and the final image will be stored, or press enter for the current directory</p></li>
+<li><p>Enter the #SBATCH flags to be append to the sbatch script, and enter “q” at the end; don’t include “#SBATCH”, only the flags themselves, for instance:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>--partition<span class="o">=</span>day
+--nodes<span class="o">=</span><span class="m">1</span>
+--cpus-per-task<span class="o">=</span><span class="m">10</span>
+--mem-per-cpus<span class="o">=</span>5G
+--time<span class="o">=</span><span class="m">00</span>-01:00:00
+q
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The hanlder script will automatically configure the sbatch script and will run it for you</p></li>
 </ul>
 </div></blockquote>
+</section>
+<section id="enter-the-sbatch-flags-for-sbatch-script-s-to-run-pipeline-image">
+<h2>3. Enter the #SBATCH Flags for sbatch Script(s) to Run Pipeline Image<a class="headerlink" href="#enter-the-sbatch-flags-for-sbatch-script-s-to-run-pipeline-image" title="Permalink to this heading"></a></h2>
+<p>Enter the #SBATCH flags to be append to the sbatch script, and enter “q” at the end; again: don’t include “#SBATCH”, only the flags themselves, for instance:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the pipeline will be run as an array job, the handler script will generate two sbatch scripts to run the pipeline and will ask in turns the #SBATCH flags for each. The first script will be the array job, so don’t forget to include the array flags.</p>
+</div>
 </section>
 <section id="enter-the-full-path-to-the-directory-containing-the-nifti-files">
 <h2>4. Enter the Full Path to the Directory Containing the NIfTI Files<a class="headerlink" href="#enter-the-full-path-to-the-directory-containing-the-nifti-files" title="Permalink to this heading"></a></h2>
@@ -230,8 +242,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to morphometry’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="running_on_a_slurm_server_ENIGMA_OCD.html" class="btn btn-neutral float-right" title="Running on a Slurm Server (ENIGMA-OCD)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="running_on_a_desktop_server_ENIGMA_OCD.html" class="btn btn-neutral float-left" title="Running on a Desktop Server (ENIGMA-OCD)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="troubleshooting.html" class="btn btn-neutral float-right" title="Troubleshooting" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

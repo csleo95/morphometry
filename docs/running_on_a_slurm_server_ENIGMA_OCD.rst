@@ -1,46 +1,63 @@
 ===========================
-Running on a Desktop Server (ENIGMA-OCD)
+Running on a Slurm Server (ENIGMA-OCD)
 ===========================
 
-This guide provides step-by-step instructions for running the pipeline in a desktop via a handler script. It requires minimal user input and automatically manages the pipeline. 
+This guide provides step-by-step instructions for running the pipeline in a slurm via a handler script. It requires minimal user input and automatically manages the pipeline. 
 
-1. Download the Handler Script
+1. Download and Execute the Handler Script
 ------------------------------
 
-    - Navigate to https://github.com/csleo95/morphometry/blob/main/handler_scripts/morphometry_handler.sh
-    - Click on 'Download raw file'.
-
-2. Execute the Handler Script
-------------------------------
-
-    - Open the terminal.
-    - Change directory to where the handler script file was downloaded.
+    - Open the terminal
+    - Navigate to the directory where the handler script will be executed
+    - Download the hanlder script by either:
 
     .. code-block:: bash
 
-        cd ~/Downloads
+        curl -O https://raw.githubusercontent.com/csleo95/morphometry/main/handler_scripts/morphometry_handler_slurm.sh
+    
+    or: 
+
+    .. code-block:: bash
+
+        wget https://raw.githubusercontent.com/csleo95/morphometry/main/handler_scripts/morphometry_handler_slurm.sh
 
     - Make the handler script file executable.
 
     .. code-block:: bash
 
-        chmod + x morphometry_handler.sh
+        chmod + x morphometry_handler_slurm.sh
 
     - Execute the handler script file.
 
     .. code-block:: bash
 
-        ./morphometry_handler.sh
+        ./morphometry_handler_slurm.sh
 
-3. Set the Container Platform to be Used
-----------------------------------------
+2. Provide Input for sbatch Script to Build Pipeline Image
+------------------------------
 
-The script interacts with the container platforms installed on the server:
+    - Enter the path to the directory where the pipeline image will be built and the final image will be stored, or press enter for the current directory
+    - Enter the #SBATCH flags to be append to the sbatch script, and enter "q" at the end; don't include "#SBATCH", only the flags themselves, for instance:
 
-    - If neither Docker nor Singularity is installed, the script will request installation and then exit.
-    - If Docker is installed, the script will search for the pipeline image among local images. If not found, it will download the image (size: 15.39 GB). If found, it proceeds to the next step.
-    - If Singularity is installed, the script will search for the pipeline image in the current folder. If not found, it will download the image (size: 6.5 GB). If found, it proceeds to the next step.
-    - If both Docker and Singularity are installed, the script will prompt the user to select one of these platforms for executing the pipeline.
+    .. code-block:: bash
+
+        --partition=day
+        --nodes=1
+        --cpus-per-task=10
+        --mem-per-cpus=5G
+        --time=00-01:00:00
+        q
+
+    - The hanlder script will automatically configure the sbatch script and will run it for you
+
+3. Enter the #SBATCH Flags for sbatch Script(s) to Run Pipeline Image
+---------------------------------------------------------------------
+
+Enter the #SBATCH flags to be append to the sbatch script, and enter "q" at the end; again: don't include "#SBATCH", only the flags themselves, for instance:
+
+.. note::
+
+   If the pipeline will be run as an array job, the handler script will generate two sbatch scripts to run the pipeline and will ask in turns the #SBATCH flags for each. The first script will be the array job, so don't forget to include the array flags.
 
 4. Enter the Full Path to the Directory Containing the NIfTI Files
 ------------------------------------------------------------------

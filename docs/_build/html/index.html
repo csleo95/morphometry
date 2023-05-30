@@ -45,6 +45,8 @@
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="running_on_a_desktop_server_ENIGMA_OCD.html">Running on a Desktop Server (ENIGMA-OCD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_on_a_slurm_server_ENIGMA_OCD.html">Running on a Slurm Server (ENIGMA-OCD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
 </ul>
 
         </div>
@@ -88,24 +90,48 @@
 <li class="toctree-l2"><a class="reference internal" href="running_on_a_desktop_server_ENIGMA_OCD.html#check-and-send-the-output">8. Check and Send the Output</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="running_on_a_slurm_server_ENIGMA_OCD.html">Running on a Slurm Server (ENIGMA-OCD)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="running_on_a_slurm_server_ENIGMA_OCD.html#download-and-execute-the-handler-script">1. Download and Execute the Handler Script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running_on_a_slurm_server_ENIGMA_OCD.html#provide-input-for-sbatch-script-to-build-pipeline-image">2. Provide Input for sbatch Script to Build Pipeline Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running_on_a_slurm_server_ENIGMA_OCD.html#enter-the-sbatch-flags-for-sbatch-script-s-to-run-pipeline-image">3. Enter the #SBATCH Flags for sbatch Script(s) to Run Pipeline Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running_on_a_slurm_server_ENIGMA_OCD.html#enter-the-full-path-to-the-directory-containing-the-nifti-files">4. Enter the Full Path to the Directory Containing the NIfTI Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running_on_a_slurm_server_ENIGMA_OCD.html#enter-the-full-path-to-the-directory-containing-freesurfers-recon-all-output">5. Enter the Full Path to the Directory Containing Freesurfer’s recon-all Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running_on_a_slurm_server_ENIGMA_OCD.html#enter-the-number-of-threads-to-be-used">6. Enter the Number of Threads to be Used</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running_on_a_slurm_server_ENIGMA_OCD.html#pipeline-starts-running">7. Pipeline Starts Running!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running_on_a_slurm_server_ENIGMA_OCD.html#check-and-send-the-output">8. Check and Send the Output</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#my-server-does-not-have-internet-access">My server does not have internet access</a></li>
+</ul>
+</li>
 </ul>
 </div>
 <section id="about">
 <h2>About<a class="headerlink" href="#about" title="Permalink to this heading"></a></h2>
-<p>This is the manual for running the data processing pipeline of the ENIGMA-OCD Imaging Transcriptomics project.</p>
+<p>Welcome to the <strong>ENIGMA-OCD Imaging Transcriptomics project</strong> data processing pipeline manual. This user guide will walk you through each step in the process to ensure successful execution and interpretation of results.</p>
 </section>
-<section id="running-the-pipeline-on-a-desktop-server">
-<h2>Running the Pipeline on a Desktop Server<a class="headerlink" href="#running-the-pipeline-on-a-desktop-server" title="Permalink to this heading"></a></h2>
-<p>This section will walk you through running the pipeline step by step.</p>
+<section id="what-the-pipeline-does">
+<h2>What the Pipeline Does<a class="headerlink" href="#what-the-pipeline-does" title="Permalink to this heading"></a></h2>
+<p>The pipeline performs an automated sequence of steps which includes:</p>
+<ul class="simple">
+<li><p>Preprocessing NIfTI files with freesurfer’s <cite>recon-all</cite> (if required)</p></li>
+<li><p>Computing morphometric features for subparcellations of the Desikan-Killiany (DK) atlas</p></li>
+<li><p>Using freesurfer’s <cite>run-samseg</cite> to compute morphometric statistics for subcortical structures</p></li>
+</ul>
+<p>This pipeline builds upon scripts developed by Rafael Romero-Garcia et al [1]. To ensure reproducibility of results and flexibility of use, containerized versions of the pipeline have been developed on both the Docker and Singularity platforms.</p>
+</section>
+<section id="steps-in-the-pipeline">
+<h2>Steps in the Pipeline<a class="headerlink" href="#steps-in-the-pipeline" title="Permalink to this heading"></a></h2>
+<p>Running the pipeline involves the following steps:</p>
 <ol class="arabic simple">
-<li><dl class="simple">
-<dt>Download the handler script</dt><dd><ol class="lowerroman simple">
-<li><p>Navigate to <a class="reference external" href="https://github.com/csleo95/morphometry/blob/main/handler_scripts/morphometry_handler.sh">https://github.com/csleo95/morphometry/blob/main/handler_scripts/morphometry_handler.sh</a></p></li>
-<li><p>Click on Download raw file</p></li>
-</ol>
-</dd>
-</dl>
-</li>
+<li><p><strong>Download a handler script.</strong></p></li>
+<li><p><strong>Execute the handler script</strong> from terminal, which will interactively prompt the user for the following information to automatically run the pipeline:
+- Whether Docker or Singularity will be used to run the pipeline (if just one of them is installed on the server, the handler script will automatically use it to run the pipeline)
+- The full path to a directory containing NIfTI files
+- The full path to a directory containing freesurfer’s <cite>recon-all</cite> output for some / all the NIfTI files in the above directory (optional)
+- The number of threads to be used in the pipeline</p></li>
+<li><p><strong>Check the output files</strong> generated from the pipeline</p></li>
 </ol>
 </section>
 </section>

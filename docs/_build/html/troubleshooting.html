@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Troubleshooting &mdash; morphometry 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Running on a Slurm Server (ENIGMA-OCD)" href="running_on_a_slurm_server_ENIGMA_OCD.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            morphometry
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="running_on_a_desktop_server_ENIGMA_OCD.html">Running on a Desktop Server (ENIGMA-OCD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_on_a_slurm_server_ENIGMA_OCD.html">Running on a Slurm Server (ENIGMA-OCD)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#my-server-does-not-have-internet-access">My server does not have internet access</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#using-docker">Using Docker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-singularity-version-3-0">Using Singularity (version ≥ 3.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#singularity-less-v3">Using Singularity (version &lt; 3.0)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">morphometry</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Troubleshooting</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/troubleshooting.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="troubleshooting">
+<h1>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading"></a></h1>
+<p>This section provides solutions to common issues that you may encounter while running the pipeline. Below is a list of problems we will address:</p>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#my-server-does-not-have-internet-access" id="id3">My server does not have internet access</a></p>
+<ul>
+<li><p><a class="reference internal" href="#using-docker" id="id4">Using Docker</a></p></li>
+<li><p><a class="reference internal" href="#using-singularity-version-3-0" id="id5">Using Singularity (version ≥ 3.0)</a></p></li>
+<li><p><a class="reference internal" href="#singularity-less-v3" id="id6">Using Singularity (version &lt; 3.0)</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="my-server-does-not-have-internet-access">
+<span id="no-internet"></span><h2><a class="toc-backref" href="#id3" role="doc-backlink">My server does not have internet access</a><a class="headerlink" href="#my-server-does-not-have-internet-access" title="Permalink to this heading"></a></h2>
+<p>If your server does not have internet access, you can still run this pipeline by downloading its dependencies on another server (e.g., your personal computer) with internet access, and then transferring them to your server. However, your server must have Docker and/or Singularity installed so you can run this pipeline. Three workarounds are outlined below depending on whether you will use Docker or Singularity in your server.</p>
+<section id="using-docker">
+<span id="id1"></span><h3><a class="toc-backref" href="#id4" role="doc-backlink">Using Docker</a><a class="headerlink" href="#using-docker" title="Permalink to this heading"></a></h3>
+<p>You will need to have Docker installed on the other server with internet access. In this case, you can follow the steps below:</p>
+<ol class="arabic">
+<li><p>Download the handler scripts in the server with internet access.</p></li>
+<li><p>Run the commands below on the server with internet access to download the pipeline image, and convert it to a tar file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">pull</span> <span class="n">csleo</span><span class="o">/</span><span class="n">img_trs</span>
+<span class="n">docker</span> <span class="n">save</span> <span class="o">--</span><span class="n">output</span> <span class="n">img_trs</span><span class="o">.</span><span class="n">tar</span> <span class="n">csleo</span><span class="o">/</span><span class="n">img_trs</span>
+</pre></div>
+</div>
+</li>
+<li><p>Transfer the handler script file (run_img_trs.sh) and the tar file of the pipeline (img_trs.tar) to your server without internet connection</p></li>
+<li><p>In your server without internet connection, run the command below in the folder where the tar file of the pipeline (img_trs.tar) is located:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">load</span> <span class="o">-</span><span class="n">i</span> <span class="n">img_trs</span><span class="o">.</span><span class="n">tar</span>
+</pre></div>
+</div>
+</li>
+<li><p>In your server without internet connection, you can follow step 2.2 onwards to run the pipeline.</p></li>
+</ol>
+</section>
+<section id="using-singularity-version-3-0">
+<span id="singularity-v3"></span><h3><a class="toc-backref" href="#id5" role="doc-backlink">Using Singularity (version ≥ 3.0)</a><a class="headerlink" href="#using-singularity-version-3-0" title="Permalink to this heading"></a></h3>
+<p>You will need to have Singularity installed on the other server with internet access. In this case, you can follow the steps below:</p>
+<ol class="arabic">
+<li><p>Download the handler scripts in the server with internet access.</p></li>
+<li><p>Run the command below on the server with internet access to build the pipeline image:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">singularity</span> <span class="n">build</span> <span class="n">img_trs</span><span class="o">.</span><span class="n">sif</span> <span class="n">docker</span><span class="p">:</span><span class="o">//</span><span class="n">csleo</span><span class="o">/</span><span class="n">img_trs</span>
+</pre></div>
+</div>
+</li>
+<li><p>Transfer the handler script file (run_img_trs.sh) and the SIF file of the pipeline (img_trs.sif) to your server without internet connection</p></li>
+<li><p>In your server without an internet connection, you can follow step 2.2 onwards to run the pipeline. Make sure the img_trs.sif file is in the directory from which you are executing the handler script.</p></li>
+</ol>
+</section>
+<section id="singularity-less-v3">
+<span id="id2"></span><h3><a class="toc-backref" href="#id6" role="doc-backlink">Using Singularity (version &lt; 3.0)</a><a class="headerlink" href="#singularity-less-v3" title="Permalink to this heading"></a></h3>
+<p>You will need to have Docker installed on the other server with internet access. In this case, you can follow the steps below:</p>
+<ol class="arabic">
+<li><p>Download the handler scripts in the server with internet access.</p></li>
+<li><p>Run the command below on the server with internet access to download the pipeline image (note that you have to substitute the <cite>&lt;version&gt;</cite> by 2.3, 2.4, 2.5 or 2.6 depending on the version of Singularity that is installed on your server):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>docker run --privileged -t --rm \
+           -v /var/run/docker.sock:/var/run/docker.sock \
+           -v $(pwd):/output \
+           singularityware/docker2singularity:v&lt;version&gt; \
+           --name img_trs csleo/img_trs
+</pre></div>
+</div>
+</li>
+<li><p>Transfer the handler script file (run_img_trs.sh) and the SIMG file of the pipeline (img_trs.simg) to your server without internet connection</p></li>
+</ol>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="running_on_a_slurm_server_ENIGMA_OCD.html" class="btn btn-neutral float-left" title="Running on a Slurm Server (ENIGMA-OCD)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Leonardo Cardoso Saraiva.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
