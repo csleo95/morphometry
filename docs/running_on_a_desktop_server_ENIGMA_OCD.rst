@@ -27,14 +27,18 @@ chmod +x morphometry_handler.sh
     iv. Execute the handler script file. To do this, enter the following command:
 
 ./morphometry_handler.sh
+
 3. Execute the handler script
+-----------------------------
 The output of the handler script will depend on the container platforms installed (or not) in the server:
 
 Neither Docker, nor Singularity are installed: the script will print a message requesting that one of these should be installed in the system and will exit. In this case, follow this instruction and execute again the handler script.
 Only Docker is installed: the script will look for the pipeline image among the local images. If it has not been downloaded yet, it will automatically download the image. The Docker image is 15.39 GB, so please make sure that there is enough room in Docker Desktop to download it. If it has already been downloaded, the handler script will proceed to the next step.
 Only Singularity is installed: the script will look for the pipeline image in the current folder. If it has not been downloaded yet, it will automatically download the image. The pipeline Singularity image is 6.5 GB, so please make sure that there is enough room in the system to download it. If it has already been downloaded, the handler script will proceed to the next step.
 Both Docker and Singularity are installed: the script will prompt the user to select one of these platforms to use for executing the pipeline. If you enter 1, Docker is selected, and the handler script will follow the steps described in the Only Docker is installed item above. If you enter 2, Singularity is selected, and the handler script will follow the steps described in the Only Singularity is installed item above.
+
 4. Enter the full path to the directory containing the NIfTI files
+-----------------------------
 The user will be prompted to enter the full path to the directory containing the NIfTI files of the T1 scans of the subjects. This directory can be located either in the user filesystem or in a mounted drive. In either case, it should be noted that the full path is required, without characters such as “~/’, nor environment variables. Accordingly, a full path would have a structure similar to the following:
 
 1) Full path to directory with NIfTI files: /home/leocs/imgs/nifti
@@ -56,6 +60,7 @@ Alternatively, it can contain the NIfTI files of the T1 scans in valid BIDS form
 │       	     ├── sub-0002_ses-01_acq-VBMSENSE_rec-TOC_run-1_T1w.nii.gz
 
 5. Enter the full path to the directory containing freesurfer’s recon-all output
+-----------------------------
 The user will be prompted to enter the full path to the directory containing output from the freesurfer’s recon-all command for some / all NIfTI files located in the directory with the NIfTI files. This directory can also be located in the user filesystem or in a mounted drive; and the path requirements are the same as above. In addition, it should be noted that the directories within this directory should have the same naming as their corresponding NIfTI files (without the file extensions, of course). Accordingly, considering that the provided directory with NIfTI files was any of the examples above, this directory should have the following structure and naming:
 
 ├── reconall
