@@ -20,7 +20,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Running on a Desktop Server (ENIGMA-OCD)" href="running_on_a_desktop_server_ENIGMA_OCD.html" /> 
+    <link rel="next" title="Usage" href="usage.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -44,6 +44,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="running_on_a_desktop_server_ENIGMA_OCD.html">Running on a Desktop Server (ENIGMA-OCD)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="running_on_a_slurm_server_ENIGMA_OCD.html">Running on a Slurm Server (ENIGMA-OCD)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
@@ -79,15 +80,22 @@
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#command-structure">Command Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#required-arguments">Required Arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#optional-arguments">Optional Arguments</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="running_on_a_desktop_server_ENIGMA_OCD.html">Running on a Desktop Server (ENIGMA-OCD)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="running_on_a_desktop_server_ENIGMA_OCD.html#download-the-handler-script">1. Download the Handler Script</a></li>
-<li class="toctree-l2"><a class="reference internal" href="running_on_a_desktop_server_ENIGMA_OCD.html#execute-the-handler-script">2. Execute the Handler Script</a></li>
-<li class="toctree-l2"><a class="reference internal" href="running_on_a_desktop_server_ENIGMA_OCD.html#set-the-container-platform-to-be-used">3. Set the Container Platform to be Used</a></li>
-<li class="toctree-l2"><a class="reference internal" href="running_on_a_desktop_server_ENIGMA_OCD.html#enter-the-full-path-to-the-directory-containing-the-nifti-files">4. Enter the Full Path to the Directory Containing the NIfTI Files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="running_on_a_desktop_server_ENIGMA_OCD.html#enter-the-full-path-to-the-directory-containing-freesurfers-recon-all-output">5. Enter the Full Path to the Directory Containing Freesurfer’s recon-all Output</a></li>
-<li class="toctree-l2"><a class="reference internal" href="running_on_a_desktop_server_ENIGMA_OCD.html#enter-the-number-of-threads-to-be-used">6. Enter the Number of Threads to be Used</a></li>
-<li class="toctree-l2"><a class="reference internal" href="running_on_a_desktop_server_ENIGMA_OCD.html#pipeline-starts-running">7. Pipeline Starts Running!</a></li>
-<li class="toctree-l2"><a class="reference internal" href="running_on_a_desktop_server_ENIGMA_OCD.html#check-and-send-the-output">8. Check and Send the Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running_on_a_desktop_server_ENIGMA_OCD.html#downloading-the-handler-script">1. Downloading the Handler Script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running_on_a_desktop_server_ENIGMA_OCD.html#executing-the-handler-script">2. Executing the Handler Script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running_on_a_desktop_server_ENIGMA_OCD.html#selecting-the-container-platform">3. Selecting the Container Platform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running_on_a_desktop_server_ENIGMA_OCD.html#specifying-the-directory-path-for-nifti-files">4. Specifying the Directory Path for NIfTI Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running_on_a_desktop_server_ENIGMA_OCD.html#specifying-the-structure-of-the-nifti-files-directory">5. Specifying the Structure of the NIfTI Files Directory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running_on_a_desktop_server_ENIGMA_OCD.html#specifying-the-directory-path-for-recon-all-output">6. Specifying the Directory Path for recon-all Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running_on_a_desktop_server_ENIGMA_OCD.html#specifying-the-number-of-threads-for-the-pipeline">6. Specifying the Number of Threads for the Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running_on_a_desktop_server_ENIGMA_OCD.html#launching-the-pipeline">7. Launching the Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running_on_a_desktop_server_ENIGMA_OCD.html#reviewing-and-sharing-the-pipeline-output">8. Reviewing and Sharing the Pipeline Output</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="running_on_a_slurm_server_ENIGMA_OCD.html">Running on a Slurm Server (ENIGMA-OCD)</a><ul>
@@ -153,7 +161,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="running_on_a_desktop_server_ENIGMA_OCD.html" class="btn btn-neutral float-right" title="Running on a Desktop Server (ENIGMA-OCD)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="usage.html" class="btn btn-neutral float-right" title="Usage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

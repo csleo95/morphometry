@@ -2,7 +2,10 @@
 Running on a Slurm Server (ENIGMA-OCD)
 ===========================
 
-This guide provides step-by-step instructions for running the pipeline in a slurm via a handler script. It requires minimal user input and automatically manages the pipeline. 
+This section provides a step-by-step guide for executing the pipeline on a slurm server. This process \
+involves running a handler script that interactively collects inputs to automatically configure and initiate \
+the pipeline. The script also verifies the validity of the inputs. If any inputs are found to be invalid, \
+it will display error messages and prompt you to re-enter the incorrect ones.
 
 1. Download and Execute the Handler Script
 ------------------------------
