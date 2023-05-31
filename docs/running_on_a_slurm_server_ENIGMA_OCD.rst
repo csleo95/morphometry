@@ -7,6 +7,7 @@ involves running a handler script that interactively collects inputs to automati
 the pipeline. The script also verifies the validity of the inputs. If any inputs are found to be invalid, \
 it will display error messages and prompt you to re-enter the incorrect ones.
 
+
 1. Download and Execute the Handler Script
 ------------------------------
 
@@ -36,6 +37,7 @@ it will display error messages and prompt you to re-enter the incorrect ones.
 
         ./morphometry_handler_slurm.sh
 
+
 2. Provide Input for sbatch Script to Build Pipeline Image
 ------------------------------
 
@@ -53,6 +55,7 @@ it will display error messages and prompt you to re-enter the incorrect ones.
 
     - The hanlder script will automatically configure the sbatch script and will run it for you
 
+
 3. Enter the #SBATCH Flags for sbatch Script(s) to Run Pipeline Image
 ---------------------------------------------------------------------
 
@@ -62,98 +65,172 @@ Enter the #SBATCH flags to be append to the sbatch script, and enter "q" at the 
 
    If the pipeline will be run as an array job, the handler script will generate two sbatch scripts to run the pipeline and will ask in turns the #SBATCH flags for each. The first script will be the array job, so don't forget to include the array flags.
 
-4. Enter the Full Path to the Directory Containing the NIfTI Files
-------------------------------------------------------------------
 
-The user needs to provide the full path to the directory containing the NIfTI files of the T1 scans. The directory can be in the user filesystem or a mounted drive. The full path is required, without characters such as "~/", nor environment variables.
+4. Specifying the Directory Path for NIfTI Files
+------------------------------------------------------------
 
-    Example of full path:
+During the execution of the script, you will be asked to provide the full path to the directory containing the NIfTI files of the T1 scans. Please note the following important points:
 
-    .. code-block:: bash
+- This directory could be located in your user filesystem or on a mounted drive.
+- The path provided must be the complete, absolute path. Relative paths or paths containing environment variables (such as `~/`) are not accepted.
 
-        /home/leocs/imgs/nifti
+For example, a correct full path might look like this: 
 
-The NIfTI files can be structured in two ways: either only containing the T1 scans or containing the T1 scans in valid BIDS format.
+.. code-block:: bash
 
-    Examples:
+    /home/leocs/imgs/nifti
 
-    .. code-block:: bash
+**Directory Structure**
 
-        ├── nifti
-        │   ├── sub0001_ses-01_acq-VBM6minSENSE_rec-TOC_run-1_T1w.nii.gz
-        │   ├── sub0002_ses-01_acq-VBM6minSENSE_rec-TOC_run-1_T1w.nii.gz
+The NIfTI files directory can follow one of two possible structures:
 
-        ├── nifti
-        │   └── sub-0001
-        │       └── ses-01
-        │       	└── anat
-        │       	    ├── sub-0001_ses-01_acq-VBMSENSE_rec-TOC_run-1_T1w.nii.gz
-        │   └── sub-0002
-        │       └── ses-01
-        │       	└── anat
-        │       	    ├── sub-0002_ses-01_acq-VBMSENSE_rec-TOC_run-1_T1w.nii.gz
-
-5. Enter the Full Path to the Directory Containing Freesurfer’s recon-all Output
--------------------------------------------------------------------------------
-
-The user needs to provide the full path to the directory containing the output from Freesurfer’s recon-all command. The directories within this directory should have the same naming as their corresponding NIfTI files (without the file extensions).
+**Structure 1: Raw**
+- The directory contains only the NIfTI files of the T1 scans. 
 
 Example:
 
-    .. code-block:: bash
+.. code-block:: bash
 
-        ├── reconall
-        │   └── sub-0001_ses-01_acq-VBM6minSENSE_rec-TOC_run-1_T1w
-        │       ├── label
-        │       ├── mri
-        │       ├── scripts
-        │       ├── stats
-        │       ├── surf
-        │       ├── tmp
-        │       ├── touch
-        │       └── trash
-        │   └── sub-0002_ses-01_acq-VBM6minSENSE_rec-TOC_run-1_T1w
-        │       ├── label
-        │       ├── mri
-        │       ├── scripts
-        │       ├── stats
-        │       ├── surf
-        │       ├── tmp
-        │       ├── touch
-        │       └── trash
+    ├── nifti
+    │   ├── sub0001_ses-01_acq-VBM6minSENSE_rec-TOC_run-1_T1w.nii.gz
+    │   ├── sub0002_ses-01_acq-VBM6minSENSE_rec-TOC_run-1_T1w.nii.gz
 
-If there are no NIfTI files that have undergone recon-all, or if you want to run recon-all again, just press ENTER when prompted.
+**Structure 2: BIDS Format**
+- The directory contains the NIfTI files of the T1 scans structured in valid BIDS format (the `ses` directory is optional).
 
-6. Enter the Number of Threads to be Used
------------------------------------------
+Example:
 
-The user will be prompted to enter the number of threads to be used in the pipeline. This number corresponds to the number of NIfTI files processed simultaneously. If unsure of the number of cores available on your system, enter 1.
+.. code-block:: bash
 
-7. Pipeline Starts Running!
+    ├── nifti
+    │   └── sub-0001
+    │       └── ses-01
+    │           └── anat
+    │               ├── sub-0001_ses-01_acq-VBMSENSE_rec-TOC_run-1_T1w.nii.gz
+    │   └── sub-0002
+    │       └── ses-01
+    │           └── anat
+    │               ├── sub-0002_ses-01_acq-VBMSENSE_rec-TOC_run-1_T1w.nii.gz
+
+
+
+5. Specifying the Structure of the NIfTI Files Directory
+------------------------------------------------------------------
+
+During the execution of the script, you will be asked to specify the structure of the directory containing the NIfTI files. Please refer to the description provided in section 4 for the possible structures (i.e., raw NIfTI files or valid BIDS format).
+
+Please note that you should specify the format of your directory as either "raw" or "bids" depending on the structure of your NIfTI files directory.
+
+For example:
+
+.. code-block:: bash
+
+    Enter the structure of the NIfTI files directory: raw
+
+or 
+
+.. code-block:: bash
+
+    Enter the structure of the NIfTI files directory: bids
+
+
+6. Specifying the Directory Path for recon-all Output
+--------------------------------------------------------------
+
+During the execution of the script, you will be asked to provide the full path to the directory containing the output from Freesurfer's `recon-all` operation. 
+
+Please note the following:
+
+- This directory could be located in your user filesystem or on a mounted drive.
+- The path provided must be the complete, absolute path. Relative paths or paths containing environment variables (such as `~/`) are not accepted.
+- The directories within this directory should be named identically to their corresponding NIfTI files, excluding file extensions.
+
+For example, a correct full path and directory structure might look like this:
+
+.. code-block:: bash
+
+    /home/leocs/imgs/recon-all-output
+
+And the corresponding directory structure:
+
+.. code-block:: bash
+
+    ├── reconall
+    │   └── sub-0001_ses-01_acq-VBM6minSENSE_rec-TOC_run-1_T1w
+    │       ├── label
+    │       ├── mri
+    │       ├── scripts
+    │       ├── stats
+    │       ├── surf
+    │       ├── tmp
+    │       ├── touch
+    │       └── trash
+    │   └── sub-0002_ses-01_acq-VBM6minSENSE_rec-TOC_run-1_T1w
+    │       ├── label
+    │       ├── mri
+    │       ├── scripts
+    │       ├── stats
+    │       ├── surf
+    │       ├── tmp
+    │       ├── touch
+    │       └── trash
+
+In case you don't have any NIfTI files that have undergone the `recon-all` operation, or if you wish to run `recon-all` again, simply press ENTER when prompted.
+
+
+7. Specifying the Number of Threads for the Pipeline
+----------------------------------------------------------
+
+During the script execution, you will be asked to specify the number of threads that the pipeline should use. This number determines how many NIfTI files can be processed concurrently. 
+
+Keep the following in mind:
+
+- The number of threads should ideally not exceed the number of cores available on your system.
+- If you are unsure about the number of cores your system has, it's safe to specify 1.
+
+For instance, if your system has 4 cores, you might enter:
+
+.. code-block:: bash
+
+    Enter the number of threads: 4
+
+If you're unsure, you can simply enter 1:
+
+.. code-block:: bash
+
+    Enter the number of threads: 1
+
+
+8. Launching the Pipeline
 ----------------------------
 
-The pipeline runs in two main workflows:
+Upon successful configuration, the pipeline will commence its operations. It runs in two main workflows:
 
-Preprocessing Workflow
+**1. Preprocessing Workflow**
 ^^^^^^^^^^^^^^^^^^^^^^
 
-This workflow does the following:
+The Preprocessing Workflow performs the following tasks:
 
-- Runs `recon-all` for all the NIfTI files that were not previously processed with this command, processed with freesurfer versions less than 7.1.1, or processed with errors.
-- Runs `run_samseg` for all the NIfTI files. The output of this command will be stored in a directory named `samseg` inside the `enigma_ocd` directory.
-- Gathers quality control (QC) statistics.
+- Execution of `recon-all` command: This applies to all NIfTI files that haven't been processed with this command, those processed with FreeSurfer versions older than 7.1.1, or those that encountered errors during processing.
+- Execution of `run_samseg` command: This applies to all NIfTI files. The output of this operation is stored in a `samseg` directory within the `enigma_ocd` directory.
+- Quality Control (QC) Statistics: Various QC statistics are collected and stored.
 
-Morphometric Statistics Workflow
+**2. Morphometric Statistics Workflow**
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This workflow does the following:
+The Morphometric Statistics Workflow performs the following tasks:
 
-- Computes area, volume, thickness, intrinsic and extrinsic curvatures, and sulcal depth statistics for cortical regions.
-- Computes area, and volume statistics for subcortical regions.
-- Gathers QC statistics.
+- Computation of Cortical Region Statistics: Area, volume, thickness, intrinsic and extrinsic curvatures, and sulcal depth statistics are computed for cortical regions.
+- Computation of Subcortical Region Statistics: Area and volume statistics are calculated for subcortical regions.
 
-8. Check and Send the Output
-----------------------------
 
-After running the pipeline, please check all the files in the directory `enigma-ocd/morhometric_stats` and send them to leonardo.saraiva@usp.br.
+9. Reviewing and Sharing the Pipeline Output
+--------------------------------------------------
+
+Upon completion of the pipeline, an `enigma-ocd` folder will be generated in your current directory. This folder contains two key items:
+
+- `imaging_transcriptomics.zip`: This zipped folder contains the output data from the pipeline.
+- `report.html`: This HTML file presents a comprehensive report on the pipeline's operations and results.
+
+To share these results, please send both `imaging_transcriptomics.zip` and `report.html` files to leonardo.saraiva@usp.br. You can use your preferred email client or web-based email service to do so.
 

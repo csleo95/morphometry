@@ -53,13 +53,13 @@
 <li class="toctree-l2"><a class="reference internal" href="#specifying-the-directory-path-for-nifti-files">4. Specifying the Directory Path for NIfTI Files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#specifying-the-structure-of-the-nifti-files-directory">5. Specifying the Structure of the NIfTI Files Directory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#specifying-the-directory-path-for-recon-all-output">6. Specifying the Directory Path for recon-all Output</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#specifying-the-number-of-threads-for-the-pipeline">6. Specifying the Number of Threads for the Pipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#launching-the-pipeline">7. Launching the Pipeline</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#specifying-the-number-of-threads-for-the-pipeline">7. Specifying the Number of Threads for the Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#launching-the-pipeline">8. Launching the Pipeline</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#preprocessing-workflow"><strong>1. Preprocessing Workflow</strong></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#morphometric-statistics-workflow"><strong>2. Morphometric Statistics Workflow</strong></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#reviewing-and-sharing-the-pipeline-output">8. Reviewing and Sharing the Pipeline Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reviewing-and-sharing-the-pipeline-output">9. Reviewing and Sharing the Pipeline Output</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="running_on_a_slurm_server_ENIGMA_OCD.html">Running on a Slurm Server (ENIGMA-OCD)</a></li>
@@ -243,7 +243,7 @@
 <p>In case you don’t have any NIfTI files that have undergone the <cite>recon-all</cite> operation, or if you wish to run <cite>recon-all</cite> again, simply press ENTER when prompted.</p>
 </section>
 <section id="specifying-the-number-of-threads-for-the-pipeline">
-<h2>6. Specifying the Number of Threads for the Pipeline<a class="headerlink" href="#specifying-the-number-of-threads-for-the-pipeline" title="Permalink to this heading"></a></h2>
+<h2>7. Specifying the Number of Threads for the Pipeline<a class="headerlink" href="#specifying-the-number-of-threads-for-the-pipeline" title="Permalink to this heading"></a></h2>
 <p>During the script execution, you will be asked to specify the number of threads that the pipeline should use. This number determines how many NIfTI files can be processed concurrently.</p>
 <p>Keep the following in mind:</p>
 <ul class="simple">
@@ -260,7 +260,7 @@
 </div>
 </section>
 <section id="launching-the-pipeline">
-<h2>7. Launching the Pipeline<a class="headerlink" href="#launching-the-pipeline" title="Permalink to this heading"></a></h2>
+<h2>8. Launching the Pipeline<a class="headerlink" href="#launching-the-pipeline" title="Permalink to this heading"></a></h2>
 <p>Upon successful configuration, the pipeline will commence its operations. It runs in two main workflows:</p>
 <section id="preprocessing-workflow">
 <h3><strong>1. Preprocessing Workflow</strong><a class="headerlink" href="#preprocessing-workflow" title="Permalink to this heading"></a></h3>
@@ -281,7 +281,7 @@
 </section>
 </section>
 <section id="reviewing-and-sharing-the-pipeline-output">
-<h2>8. Reviewing and Sharing the Pipeline Output<a class="headerlink" href="#reviewing-and-sharing-the-pipeline-output" title="Permalink to this heading"></a></h2>
+<h2>9. Reviewing and Sharing the Pipeline Output<a class="headerlink" href="#reviewing-and-sharing-the-pipeline-output" title="Permalink to this heading"></a></h2>
 <p>Upon completion of the pipeline, an <cite>enigma-ocd</cite> folder will be generated in your current directory. This folder contains two key items:</p>
 <ul class="simple">
 <li><p><cite>imaging_transcriptomics.zip</cite>: This zipped folder contains the output data from the pipeline.</p></li>

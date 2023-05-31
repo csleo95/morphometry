@@ -195,7 +195,7 @@ And the corresponding directory structure:
 In case you don't have any NIfTI files that have undergone the `recon-all` operation, or if you wish to run `recon-all` again, simply press ENTER when prompted.
 
 
-6. Specifying the Number of Threads for the Pipeline
+7. Specifying the Number of Threads for the Pipeline
 ----------------------------------------------------------
 
 During the script execution, you will be asked to specify the number of threads that the pipeline should use. This number determines how many NIfTI files can be processed concurrently. 
@@ -218,7 +218,7 @@ If you're unsure, you can simply enter 1:
     Enter the number of threads: 1
 
 
-7. Launching the Pipeline
+8. Launching the Pipeline
 ----------------------------
 
 Upon successful configuration, the pipeline will commence its operations. It runs in two main workflows:
@@ -241,7 +241,7 @@ The Morphometric Statistics Workflow performs the following tasks:
 - Computation of Subcortical Region Statistics: Area and volume statistics are calculated for subcortical regions.
 
 
-8. Reviewing and Sharing the Pipeline Output
+9. Reviewing and Sharing the Pipeline Output
 --------------------------------------------------
 
 Upon completion of the pipeline, an `enigma-ocd` folder will be generated in your current directory. This folder contains two key items:

@@ -51,15 +51,16 @@
 <li class="toctree-l2"><a class="reference internal" href="#download-and-execute-the-handler-script">1. Download and Execute the Handler Script</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#provide-input-for-sbatch-script-to-build-pipeline-image">2. Provide Input for sbatch Script to Build Pipeline Image</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#enter-the-sbatch-flags-for-sbatch-script-s-to-run-pipeline-image">3. Enter the #SBATCH Flags for sbatch Script(s) to Run Pipeline Image</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#enter-the-full-path-to-the-directory-containing-the-nifti-files">4. Enter the Full Path to the Directory Containing the NIfTI Files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#enter-the-full-path-to-the-directory-containing-freesurfers-recon-all-output">5. Enter the Full Path to the Directory Containing Freesurfer’s recon-all Output</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#enter-the-number-of-threads-to-be-used">6. Enter the Number of Threads to be Used</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pipeline-starts-running">7. Pipeline Starts Running!</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#preprocessing-workflow">Preprocessing Workflow</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#morphometric-statistics-workflow">Morphometric Statistics Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#specifying-the-directory-path-for-nifti-files">4. Specifying the Directory Path for NIfTI Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#specifying-the-structure-of-the-nifti-files-directory">5. Specifying the Structure of the NIfTI Files Directory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#specifying-the-directory-path-for-recon-all-output">6. Specifying the Directory Path for recon-all Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#specifying-the-number-of-threads-for-the-pipeline">7. Specifying the Number of Threads for the Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#launching-the-pipeline">8. Launching the Pipeline</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#preprocessing-workflow"><strong>1. Preprocessing Workflow</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#morphometric-statistics-workflow"><strong>2. Morphometric Statistics Workflow</strong></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#check-and-send-the-output">8. Check and Send the Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reviewing-and-sharing-the-pipeline-output">9. Reviewing and Sharing the Pipeline Output</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
@@ -149,41 +150,70 @@ q
 <p>If the pipeline will be run as an array job, the handler script will generate two sbatch scripts to run the pipeline and will ask in turns the #SBATCH flags for each. The first script will be the array job, so don’t forget to include the array flags.</p>
 </div>
 </section>
-<section id="enter-the-full-path-to-the-directory-containing-the-nifti-files">
-<h2>4. Enter the Full Path to the Directory Containing the NIfTI Files<a class="headerlink" href="#enter-the-full-path-to-the-directory-containing-the-nifti-files" title="Permalink to this heading"></a></h2>
-<p>The user needs to provide the full path to the directory containing the NIfTI files of the T1 scans. The directory can be in the user filesystem or a mounted drive. The full path is required, without characters such as “~/”, nor environment variables.</p>
-<blockquote>
-<div><p>Example of full path:</p>
+<section id="specifying-the-directory-path-for-nifti-files">
+<h2>4. Specifying the Directory Path for NIfTI Files<a class="headerlink" href="#specifying-the-directory-path-for-nifti-files" title="Permalink to this heading"></a></h2>
+<p>During the execution of the script, you will be asked to provide the full path to the directory containing the NIfTI files of the T1 scans. Please note the following important points:</p>
+<ul class="simple">
+<li><p>This directory could be located in your user filesystem or on a mounted drive.</p></li>
+<li><p>The path provided must be the complete, absolute path. Relative paths or paths containing environment variables (such as <cite>~/</cite>) are not accepted.</p></li>
+</ul>
+<p>For example, a correct full path might look like this:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/home/leocs/imgs/nifti
 </pre></div>
 </div>
-</div></blockquote>
-<p>The NIfTI files can be structured in two ways: either only containing the T1 scans or containing the T1 scans in valid BIDS format.</p>
-<blockquote>
-<div><p>Examples:</p>
+<p><strong>Directory Structure</strong></p>
+<p>The NIfTI files directory can follow one of two possible structures:</p>
+<p><strong>Structure 1: Raw</strong>
+- The directory contains only the NIfTI files of the T1 scans.</p>
+<p>Example:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>├──<span class="w"> </span>nifti
 │<span class="w">   </span>├──<span class="w"> </span>sub0001_ses-01_acq-VBM6minSENSE_rec-TOC_run-1_T1w.nii.gz
 │<span class="w">   </span>├──<span class="w"> </span>sub0002_ses-01_acq-VBM6minSENSE_rec-TOC_run-1_T1w.nii.gz
-
-├──<span class="w"> </span>nifti
-│<span class="w">   </span>└──<span class="w"> </span>sub-0001
-│<span class="w">       </span>└──<span class="w"> </span>ses-01
-│<span class="w">               </span>└──<span class="w"> </span>anat
-│<span class="w">                   </span>├──<span class="w"> </span>sub-0001_ses-01_acq-VBMSENSE_rec-TOC_run-1_T1w.nii.gz
-│<span class="w">   </span>└──<span class="w"> </span>sub-0002
-│<span class="w">       </span>└──<span class="w"> </span>ses-01
-│<span class="w">               </span>└──<span class="w"> </span>anat
-│<span class="w">                   </span>├──<span class="w"> </span>sub-0002_ses-01_acq-VBMSENSE_rec-TOC_run-1_T1w.nii.gz
 </pre></div>
 </div>
-</div></blockquote>
-</section>
-<section id="enter-the-full-path-to-the-directory-containing-freesurfers-recon-all-output">
-<h2>5. Enter the Full Path to the Directory Containing Freesurfer’s recon-all Output<a class="headerlink" href="#enter-the-full-path-to-the-directory-containing-freesurfers-recon-all-output" title="Permalink to this heading"></a></h2>
-<p>The user needs to provide the full path to the directory containing the output from Freesurfer’s recon-all command. The directories within this directory should have the same naming as their corresponding NIfTI files (without the file extensions).</p>
+<p><strong>Structure 2: BIDS Format</strong>
+- The directory contains the NIfTI files of the T1 scans structured in valid BIDS format (the <cite>ses</cite> directory is optional).</p>
 <p>Example:</p>
-<blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>├──<span class="w"> </span>reconall
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>├──<span class="w"> </span>nifti
+│<span class="w">   </span>└──<span class="w"> </span>sub-0001
+│<span class="w">       </span>└──<span class="w"> </span>ses-01
+│<span class="w">           </span>└──<span class="w"> </span>anat
+│<span class="w">               </span>├──<span class="w"> </span>sub-0001_ses-01_acq-VBMSENSE_rec-TOC_run-1_T1w.nii.gz
+│<span class="w">   </span>└──<span class="w"> </span>sub-0002
+│<span class="w">       </span>└──<span class="w"> </span>ses-01
+│<span class="w">           </span>└──<span class="w"> </span>anat
+│<span class="w">               </span>├──<span class="w"> </span>sub-0002_ses-01_acq-VBMSENSE_rec-TOC_run-1_T1w.nii.gz
+</pre></div>
+</div>
+</section>
+<section id="specifying-the-structure-of-the-nifti-files-directory">
+<h2>5. Specifying the Structure of the NIfTI Files Directory<a class="headerlink" href="#specifying-the-structure-of-the-nifti-files-directory" title="Permalink to this heading"></a></h2>
+<p>During the execution of the script, you will be asked to specify the structure of the directory containing the NIfTI files. Please refer to the description provided in section 4 for the possible structures (i.e., raw NIfTI files or valid BIDS format).</p>
+<p>Please note that you should specify the format of your directory as either “raw” or “bids” depending on the structure of your NIfTI files directory.</p>
+<p>For example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Enter<span class="w"> </span>the<span class="w"> </span>structure<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>NIfTI<span class="w"> </span>files<span class="w"> </span>directory:<span class="w"> </span>raw
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Enter<span class="w"> </span>the<span class="w"> </span>structure<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>NIfTI<span class="w"> </span>files<span class="w"> </span>directory:<span class="w"> </span>bids
+</pre></div>
+</div>
+</section>
+<section id="specifying-the-directory-path-for-recon-all-output">
+<h2>6. Specifying the Directory Path for recon-all Output<a class="headerlink" href="#specifying-the-directory-path-for-recon-all-output" title="Permalink to this heading"></a></h2>
+<p>During the execution of the script, you will be asked to provide the full path to the directory containing the output from Freesurfer’s <cite>recon-all</cite> operation.</p>
+<p>Please note the following:</p>
+<ul class="simple">
+<li><p>This directory could be located in your user filesystem or on a mounted drive.</p></li>
+<li><p>The path provided must be the complete, absolute path. Relative paths or paths containing environment variables (such as <cite>~/</cite>) are not accepted.</p></li>
+<li><p>The directories within this directory should be named identically to their corresponding NIfTI files, excluding file extensions.</p></li>
+</ul>
+<p>For example, a correct full path and directory structure might look like this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/home/leocs/imgs/recon-all-output
+</pre></div>
+</div>
+<p>And the corresponding directory structure:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>├──<span class="w"> </span>reconall
 │<span class="w">   </span>└──<span class="w"> </span>sub-0001_ses-01_acq-VBM6minSENSE_rec-TOC_run-1_T1w
 │<span class="w">       </span>├──<span class="w"> </span>label
 │<span class="w">       </span>├──<span class="w"> </span>mri
@@ -204,38 +234,54 @@ q
 │<span class="w">       </span>└──<span class="w"> </span>trash
 </pre></div>
 </div>
-</div></blockquote>
-<p>If there are no NIfTI files that have undergone recon-all, or if you want to run recon-all again, just press ENTER when prompted.</p>
+<p>In case you don’t have any NIfTI files that have undergone the <cite>recon-all</cite> operation, or if you wish to run <cite>recon-all</cite> again, simply press ENTER when prompted.</p>
 </section>
-<section id="enter-the-number-of-threads-to-be-used">
-<h2>6. Enter the Number of Threads to be Used<a class="headerlink" href="#enter-the-number-of-threads-to-be-used" title="Permalink to this heading"></a></h2>
-<p>The user will be prompted to enter the number of threads to be used in the pipeline. This number corresponds to the number of NIfTI files processed simultaneously. If unsure of the number of cores available on your system, enter 1.</p>
-</section>
-<section id="pipeline-starts-running">
-<h2>7. Pipeline Starts Running!<a class="headerlink" href="#pipeline-starts-running" title="Permalink to this heading"></a></h2>
-<p>The pipeline runs in two main workflows:</p>
-<section id="preprocessing-workflow">
-<h3>Preprocessing Workflow<a class="headerlink" href="#preprocessing-workflow" title="Permalink to this heading"></a></h3>
-<p>This workflow does the following:</p>
+<section id="specifying-the-number-of-threads-for-the-pipeline">
+<h2>7. Specifying the Number of Threads for the Pipeline<a class="headerlink" href="#specifying-the-number-of-threads-for-the-pipeline" title="Permalink to this heading"></a></h2>
+<p>During the script execution, you will be asked to specify the number of threads that the pipeline should use. This number determines how many NIfTI files can be processed concurrently.</p>
+<p>Keep the following in mind:</p>
 <ul class="simple">
-<li><p>Runs <cite>recon-all</cite> for all the NIfTI files that were not previously processed with this command, processed with freesurfer versions less than 7.1.1, or processed with errors.</p></li>
-<li><p>Runs <cite>run_samseg</cite> for all the NIfTI files. The output of this command will be stored in a directory named <cite>samseg</cite> inside the <cite>enigma_ocd</cite> directory.</p></li>
-<li><p>Gathers quality control (QC) statistics.</p></li>
+<li><p>The number of threads should ideally not exceed the number of cores available on your system.</p></li>
+<li><p>If you are unsure about the number of cores your system has, it’s safe to specify 1.</p></li>
+</ul>
+<p>For instance, if your system has 4 cores, you might enter:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Enter<span class="w"> </span>the<span class="w"> </span>number<span class="w"> </span>of<span class="w"> </span>threads:<span class="w"> </span><span class="m">4</span>
+</pre></div>
+</div>
+<p>If you’re unsure, you can simply enter 1:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Enter<span class="w"> </span>the<span class="w"> </span>number<span class="w"> </span>of<span class="w"> </span>threads:<span class="w"> </span><span class="m">1</span>
+</pre></div>
+</div>
+</section>
+<section id="launching-the-pipeline">
+<h2>8. Launching the Pipeline<a class="headerlink" href="#launching-the-pipeline" title="Permalink to this heading"></a></h2>
+<p>Upon successful configuration, the pipeline will commence its operations. It runs in two main workflows:</p>
+<section id="preprocessing-workflow">
+<h3><strong>1. Preprocessing Workflow</strong><a class="headerlink" href="#preprocessing-workflow" title="Permalink to this heading"></a></h3>
+<p>The Preprocessing Workflow performs the following tasks:</p>
+<ul class="simple">
+<li><p>Execution of <cite>recon-all</cite> command: This applies to all NIfTI files that haven’t been processed with this command, those processed with FreeSurfer versions older than 7.1.1, or those that encountered errors during processing.</p></li>
+<li><p>Execution of <cite>run_samseg</cite> command: This applies to all NIfTI files. The output of this operation is stored in a <cite>samseg</cite> directory within the <cite>enigma_ocd</cite> directory.</p></li>
+<li><p>Quality Control (QC) Statistics: Various QC statistics are collected and stored.</p></li>
 </ul>
 </section>
 <section id="morphometric-statistics-workflow">
-<h3>Morphometric Statistics Workflow<a class="headerlink" href="#morphometric-statistics-workflow" title="Permalink to this heading"></a></h3>
-<p>This workflow does the following:</p>
+<h3><strong>2. Morphometric Statistics Workflow</strong><a class="headerlink" href="#morphometric-statistics-workflow" title="Permalink to this heading"></a></h3>
+<p>The Morphometric Statistics Workflow performs the following tasks:</p>
 <ul class="simple">
-<li><p>Computes area, volume, thickness, intrinsic and extrinsic curvatures, and sulcal depth statistics for cortical regions.</p></li>
-<li><p>Computes area, and volume statistics for subcortical regions.</p></li>
-<li><p>Gathers QC statistics.</p></li>
+<li><p>Computation of Cortical Region Statistics: Area, volume, thickness, intrinsic and extrinsic curvatures, and sulcal depth statistics are computed for cortical regions.</p></li>
+<li><p>Computation of Subcortical Region Statistics: Area and volume statistics are calculated for subcortical regions.</p></li>
 </ul>
 </section>
 </section>
-<section id="check-and-send-the-output">
-<h2>8. Check and Send the Output<a class="headerlink" href="#check-and-send-the-output" title="Permalink to this heading"></a></h2>
-<p>After running the pipeline, please check all the files in the directory <cite>enigma-ocd/morhometric_stats</cite> and send them to <a class="reference external" href="mailto:leonardo&#46;saraiva&#37;&#52;&#48;usp&#46;br">leonardo<span>&#46;</span>saraiva<span>&#64;</span>usp<span>&#46;</span>br</a>.</p>
+<section id="reviewing-and-sharing-the-pipeline-output">
+<h2>9. Reviewing and Sharing the Pipeline Output<a class="headerlink" href="#reviewing-and-sharing-the-pipeline-output" title="Permalink to this heading"></a></h2>
+<p>Upon completion of the pipeline, an <cite>enigma-ocd</cite> folder will be generated in your current directory. This folder contains two key items:</p>
+<ul class="simple">
+<li><p><cite>imaging_transcriptomics.zip</cite>: This zipped folder contains the output data from the pipeline.</p></li>
+<li><p><cite>report.html</cite>: This HTML file presents a comprehensive report on the pipeline’s operations and results.</p></li>
+</ul>
+<p>To share these results, please send both <cite>imaging_transcriptomics.zip</cite> and <cite>report.html</cite> files to <a class="reference external" href="mailto:leonardo&#46;saraiva&#37;&#52;&#48;usp&#46;br">leonardo<span>&#46;</span>saraiva<span>&#64;</span>usp<span>&#46;</span>br</a>. You can use your preferred email client or web-based email service to do so.</p>
 </section>
 </section>
 
