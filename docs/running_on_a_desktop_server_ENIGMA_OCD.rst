@@ -22,13 +22,13 @@ To download the handler script, you can follow one of the methods outlined below
 
 .. code-block:: bash
 
-    curl -O https://raw.githubusercontent.com/csleo95/morphometry/main/handler_scripts/morphometry_handler_slurm.sh
+    curl -O https://raw.githubusercontent.com/csleo95/morphometry/main/handler_scripts/morphometry_handler.sh
 
 - or -
 
 .. code-block:: bash
 
-    wget https://raw.githubusercontent.com/csleo95/morphometry/main/handler_scripts/morphometry_handler_slurm.sh
+    wget https://raw.githubusercontent.com/csleo95/morphometry/main/handler_scripts/morphometry_handler.sh
 
 
 2. Executing the Handler Script
