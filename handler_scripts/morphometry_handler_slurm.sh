@@ -304,6 +304,11 @@ if [ -z "$(ls | grep 'run_image.*\.sh')" ]; then
 	
 fi
 
+# Get $array_job in case it was not set before
+if [ -f run_image_sub.sh ] && [ -f run_image_stats.sh ]; then
+    array_job=true
+fi
+
 # Make the script executable
 if [ "$array_job" = true ]; then
     chmod +x run_image_sub.sh
