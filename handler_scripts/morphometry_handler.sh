@@ -443,13 +443,13 @@ if [ $soft == 2 ]; then
 
     if [ "$recon_dir" ]; then
 
-        eval "(singularity run --cleanenv --bind $(pwd),$nifti_dir,$recon_dir $(ls | grep "^morphometry.*") \
-        $nifti_dir $(pwd)/enigma_ocd --recon-all-dir $reconpath --n-procs $cores -g 2>&1 | tee enigma_ocd/stdout.log)"
+        singularity run --cleanenv --bind $(pwd),$nifti_dir,$recon_dir morphometry.sif \
+        $nifti_dir $(pwd)/enigma_ocd --recon-all-dir $recon_dir --n-procs $n_procs 
 
     else
 
-        eval "(singularity run --cleanenv --bind $(pwd),$nifti_dir,$recon_dir $(ls | grep "^morphometry.*") \
-        $nifti_dir $(pwd)/enigma_ocd --n-procs $cores -g 2>&1 | tee enigma_ocd/stdout.log)"
+        singularity run --cleanenv --bind $(pwd),$nifti_dir,$recon_dir morphometry.sif \
+        $nifti_dir $(pwd)/enigma_ocd --n-procs $n_procs 
 
     fi
 
