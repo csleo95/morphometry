@@ -305,7 +305,7 @@ while true; do
             fi
         elif [[ "$nifti_dir_structure" == "raw" ]]; then
             # Check if the directory has at least one .nii or .nii.gz file
-            if ! ls "$nifti_dir"/*.nii "$nifti_dir"/*.nii.gz >/dev/null 2>&1; then
+            if ! ls "$nifti_dir"/*.nii >/dev/null 2>&1 && ! ls "$nifti_dir"/*.nii.gz >/dev/null 2>&1; then
                 echo -e "\033[31mNo .nii or .nii.gz files detected in the raw directory.\033[0m"
                 
                 while true; do
