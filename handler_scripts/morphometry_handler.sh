@@ -422,7 +422,7 @@ if [ $soft == 1 ]; then
     
     if [ "$recon_dir" ]; then
 
-        docker run -ti --rm --user $(id -u):0 \
+        docker run -ti --rm \
             -v $nifti_dir:/nifti \
             -v $recon_dir:/reconall \
             -v $(pwd)/enigma_ocd:/output \
@@ -430,7 +430,7 @@ if [ $soft == 1 ]; then
 
     else
 
-        docker run -ti --rm --user $(id -u):0 \
+        docker run -ti --rm \
             -v $nifti_dir:/nifti \
             -v $(pwd)/enigma_ocd:/output \
             csleo/morphometry /nifti /output --work-dir /output --n-procs $n_procs 
