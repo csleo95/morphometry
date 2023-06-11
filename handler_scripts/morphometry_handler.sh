@@ -426,14 +426,14 @@ if [ $soft == 1 ]; then
             -v $nifti_dir:/nifti \
             -v $recon_dir:/reconall \
             -v $(pwd)/enigma_ocd:/output \
-            csleo/morphometry /nifti /output --recon-all-dir /reconall --work-dir /output --n-procs $n_procs 
+            csleo/morphometry /nifti /output --recon-all-dir /reconall --work-dir /output --data-dir-structure $nifti_dir_structure --n-procs $n_procs 
 
     else
 
         docker run -ti --rm \
             -v $nifti_dir:/nifti \
             -v $(pwd)/enigma_ocd:/output \
-            csleo/morphometry /nifti /output --work-dir /output --n-procs $n_procs 
+            csleo/morphometry /nifti /output --work-dir /output --data-dir-structure $nifti_dir_structure --n-procs $n_procs 
             
     fi
 
@@ -444,12 +444,12 @@ if [ $soft == 2 ]; then
     if [ "$recon_dir" ]; then
 
         singularity run --cleanenv --bind $(pwd),$nifti_dir,$recon_dir morphometry.sif \
-        $nifti_dir $(pwd)/enigma_ocd --recon-all-dir $recon_dir --n-procs $n_procs 
+        $nifti_dir $(pwd)/enigma_ocd --recon-all-dir $recon_dir --data-dir-structure $nifti_dir_structure --n-procs $n_procs 
 
     else
 
         singularity run --cleanenv --bind $(pwd),$nifti_dir,$recon_dir morphometry.sif \
-        $nifti_dir $(pwd)/enigma_ocd --n-procs $n_procs 
+        $nifti_dir $(pwd)/enigma_ocd --data-dir-structure $nifti_dir_structure --n-procs $n_procs 
 
     fi
 
