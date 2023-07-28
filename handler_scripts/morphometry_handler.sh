@@ -24,38 +24,38 @@ tput sgr0
 
 if [ ! $(type -P docker) ] && [ $(type -P singularity) ]; then
 
-    if [ ! $(ls | grep "^morphometry\.0\.1\.\(sif\|simg\)") ]; then
+    if [ ! $(ls | grep "^morphometry\.0\.1\.1\.\(sif\|simg\)") ]; then
         echo -e "\033[1;34m[note]\033[0m $(singularity --version) is installed in the system"
         echo -e "\033[1;34m[note]\033[0m Building pipeline image"
         echo ""
 
         while true; do
             if [ $(echo $(singularity --version) | grep -o "3\.[0-9]" | wc -l) -gt 0 ]; then
-                singularity build morphometry.0.1.sif docker://csleo/morphometry:v0.1
+                singularity build morphometry.0.1.1.sif docker://csleo/morphometry:v0.1.1
             elif [ $(echo $(singularity --version) | grep -o "2\.3" | wc -l) -gt 0 ]; then
                 docker run --privileged -t --rm \
                     -v /var/run/docker.sock:/var/run/docker.sock \
                     -v $(pwd):/output \
                     singularityware/docker2singularity:v2.3 \
-                    --name morphometry.0.1 csleo/morphometry:v0.1
+                    --name morphometry.0.1.1 csleo/morphometry:v0.1.1
             elif [ $(echo $(singularity --version) | grep -o "2\.4" | wc -l) -gt 0 ]; then
                 docker run --privileged -t --rm \
                     -v /var/run/docker.sock:/var/run/docker.sock \
                     -v $(pwd):/output \
                     singularityware/docker2singularity:v2.4 \
-                    --name morphometry.0.1 csleo/morphometry:v0.1
+                    --name morphometry.0.1.1 csleo/morphometry:v0.1.1
             elif [ $(echo $(singularity --version) | grep -o "2\.5" | wc -l) -gt 0 ]; then
                 docker run --privileged -t --rm \
                     -v /var/run/docker.sock:/var/run/docker.sock \
                     -v $(pwd):/output \
                     singularityware/docker2singularity:v2.5 \
-                    --name morphometry.0.1 csleo/morphometry:v0.1
+                    --name morphometry.0.1.1 csleo/morphometry:v0.1.1
             elif [ $(echo $(singularity --version) | grep -o "2\.6" | wc -l) -gt 0 ]; then
                 docker run --privileged -t --rm \
                     -v /var/run/docker.sock:/var/run/docker.sock \
                     -v $(pwd):/output \
                     singularityware/docker2singularity:v2.6 \
-                    --name morphometry.0.1 csleo/morphometry:v0.1
+                    --name morphometry.0.1.1 csleo/morphometry:v0.1.1
             fi
 
             if [ $? -eq 0 ]; then
@@ -84,7 +84,7 @@ if [ $(type -P docker) ] && [ ! $(type -P singularity) ]; then
             echo -e "\033[1;34m[note]\033[0m $(docker --version | cut -d , -f 1) is installed in the system"
             echo -e "\033[1;34m[note]\033[0m Downloading pipeline image from docker"
             echo ""
-            docker pull csleo/morphometry:v0.1
+            docker pull csleo/morphometry:v0.1.1
         else
             echo -e "\033[1;34m[note]\033[0m $(docker --version | cut -d , -f 1) is installed in the system"
             echo -e "\033[1;34m[note]\033[0m Pipeline image already downloaded"
@@ -119,7 +119,7 @@ if [ $(type -P docker) ] && [ $(type -P singularity) ]; then
             if [ $(docker images | grep "morphometry" | grep "v0.1" | wc -l) == 0 ]; then
                 echo -e "\033[1;34m[note]\033[0m Downloading pipeline image from docker"
                 echo ""
-                docker pull csleo/morphometry:v0.1
+                docker pull csleo/morphometry:v0.1.1
             else
                 echo -e "\033[1;34m[note]\033[0m Pipeline image already downloaded"
                 break
@@ -143,37 +143,37 @@ if [ $(type -P docker) ] && [ $(type -P singularity) ]; then
 
     if [ $soft == 2 ]; then
         
-        if [ ! $(ls | grep "^morphometry\.0\.1\.\(sif\|simg\)") ]; then
+        if [ ! $(ls | grep "^morphometry\.0\.1\.1\.\(sif\|simg\)") ]; then
             echo -e "\033[1;34m[note]\033[0m Building pipeline image"
             echo ""
 
             while true; do
                 if [ $(echo $(singularity --version) | grep -o "3\.[0-9]" | wc -l) -gt 0 ]; then
-                    singularity build morphometry.0.1.sif docker://csleo/morphometry:v0.1
+                    singularity build morphometry.0.1.1.sif docker://csleo/morphometry:v0.1.1
                 elif [ $(echo $(singularity --version) | grep -o "2\.3" | wc -l) -gt 0 ]; then
                     docker run --privileged -t --rm \
                         -v /var/run/docker.sock:/var/run/docker.sock \
                         -v $(pwd):/output \
                         singularityware/docker2singularity:v2.3 \
-                        --name morphometry.0.1 csleo/morphometry:v0.1
+                        --name morphometry.0.1.1 csleo/morphometry:v0.1.1
                 elif [ $(echo $(singularity --version) | grep -o "2\.4" | wc -l) -gt 0 ]; then
                     docker run --privileged -t --rm \
                         -v /var/run/docker.sock:/var/run/docker.sock \
                         -v $(pwd):/output \
                         singularityware/docker2singularity:v2.4 \
-                        --name morphometry.0.1 csleo/morphometry:v0.1
+                        --name morphometry.0.1.1 csleo/morphometry:v0.1.1
                 elif [ $(echo $(singularity --version) | grep -o "2\.5" | wc -l) -gt 0 ]; then
                     docker run --privileged -t --rm \
                         -v /var/run/docker.sock:/var/run/docker.sock \
                         -v $(pwd):/output \
                         singularityware/docker2singularity:v2.5 \
-                        --name morphometry.0.1 csleo/morphometry:v0.1
+                        --name morphometry.0.1.1 csleo/morphometry:v0.1.1
                 elif [ $(echo $(singularity --version) | grep -o "2\.6" | wc -l) -gt 0 ]; then
                     docker run --privileged -t --rm \
                         -v /var/run/docker.sock:/var/run/docker.sock \
                         -v $(pwd):/output \
                         singularityware/docker2singularity:v2.6 \
-                        --name morphometry.0.1 csleo/morphometry:v0.1
+                        --name morphometry.0.1.1 csleo/morphometry:v0.1.1
                 fi
 
                 if [ $? -eq 0 ]; then
@@ -426,14 +426,14 @@ if [ $soft == 1 ]; then
             -v $nifti_dir:/nifti \
             -v $recon_dir:/reconall \
             -v $(pwd)/enigma_ocd:/output \
-            csleo/morphometry:v0.1 /nifti /output --recon-all-dir /reconall --work-dir /output --data-dir-structure $nifti_dir_structure --n-procs $n_procs --report --compress-results --write-dataset
+            csleo/morphometry:v0.1.1 /nifti /output --recon-all-dir /reconall --work-dir /output --data-dir-structure $nifti_dir_structure --n-procs $n_procs --report --compress-results --write-dataset
 
     else
 
         docker run -ti --rm \
             -v $nifti_dir:/nifti \
             -v $(pwd)/enigma_ocd:/output \
-            csleo/morphometry:v0.1 /nifti /output --work-dir /output --data-dir-structure $nifti_dir_structure --n-procs $n_procs --report --compress-results --write-dataset
+            csleo/morphometry:v0.1.1 /nifti /output --work-dir /output --data-dir-structure $nifti_dir_structure --n-procs $n_procs --report --compress-results --write-dataset
             
     fi
 
@@ -443,12 +443,12 @@ if [ $soft == 2 ]; then
 
     if [ "$recon_dir" ]; then
 
-        singularity run --cleanenv --bind $(pwd),$nifti_dir,$recon_dir morphometry.0.1.sif \
+        singularity run --cleanenv --bind $(pwd),$nifti_dir,$recon_dir morphometry.0.1.1.sif \
         $nifti_dir $(pwd)/enigma_ocd --recon-all-dir $recon_dir --work-dir $(pwd)/enigma_ocd --data-dir-structure $nifti_dir_structure --n-procs $n_procs --report --compress-results --write-dataset 
 
     else
 
-        singularity run --cleanenv --bind $(pwd),$nifti_dir,$recon_dir morphometry.0.1.sif \
+        singularity run --cleanenv --bind $(pwd),$nifti_dir,$recon_dir morphometry.0.1.1.sif \
         $nifti_dir $(pwd)/enigma_ocd --work-dir $(pwd)/enigma_ocd --data-dir-structure $nifti_dir_structure --n-procs $n_procs --report --compress-results --write-dataset 
 
     fi
